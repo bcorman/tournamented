@@ -1,0 +1,22 @@
+{
+  "name": "tournamented",
+  "version": "1.0.0",
+  "description": "debate tournament software",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bcorman/tournamented.git"
+  },
+  "keywords": [
+    "debate"
+  ],
+  "author": "Ben Corman and Chris Kanyotu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bcorman/tournamented/issues"
+  },
+  "homepage": "https://github.com/bcorman/tournamented#readme"
+}
