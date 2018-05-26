@@ -1,9 +1,9 @@
 // tell server to look at index.js
 const express = require('express'),
-bodyParser = require('body-parser');
+bodyParser = require('body-parser')
 
 //Get express
-const app = express();
+const app = express()
 
 //Tell controller to look at database
 const db = require('../models/')
@@ -58,4 +58,4 @@ module.exports = {
   update: (req, res) => {
     console.log(`This function has yet to be written`)
   }
-};
+}
