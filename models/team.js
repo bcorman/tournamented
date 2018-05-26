@@ -14,7 +14,7 @@ const TeamSchema = new Schema({
        ref: 'Person'
      }],
   school: {
-      type: Schema.Type.ObjectId,
+      type: Schema.Types.ObjectId,
       ref: 'School'
     }
 })
