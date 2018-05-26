@@ -6,6 +6,7 @@ const PersonSchema = new Schema({
   firstName: String,
   lastName: String,
   isJudge: Boolean,
+  isAvailable: Boolean,
   team: {
        type: Schema.Types.ObjectId,
        ref: 'Team'
