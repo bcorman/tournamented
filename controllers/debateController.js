@@ -13,7 +13,8 @@ const db = require('../models/')
 Create - debates are generated when teams are paired, not through this controller
 Read - Added.
 Update - function not needed for Minimum Viable Product
-Destroy - not needed for MVP */
+Destroy - not needed for MVP
+*/
 
 module.exports = {
   index: (req, res) => {
