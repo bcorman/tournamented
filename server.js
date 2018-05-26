@@ -26,6 +26,18 @@ app.get('/', function (req, res) {
 //Get controllers
 var controllers = require('./controllers');
 
+                        //Routes Routes Routes
+app.get('/api', controllers.api.index);
+
+//School
+app.get('/api/schools', controllers.school.index);
+//Person
+app.get('/api/persons', controllers.person.index);
+//Team
+app.get('/api/teams', controllers.team.index);
+//Debate
+app.get('/api/debates', controllers.person.index);
+
 
 //listen to port 3000. Log success to console.
 app.listen(process.env.PORT || 3000, function () {
