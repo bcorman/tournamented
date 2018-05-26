@@ -30,7 +30,7 @@ module.exports = {
       })
   },
   create: (req, res) => {
-    console.log(`This function will not likely be written`)
+    console.log(`This function has yet to be written`)
   },
   show: (req, res) => {
     //get single person
