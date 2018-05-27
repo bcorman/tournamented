@@ -1,0 +1,55 @@
+*{
+-webkit-font-smoothing: antialiased;
+font-family: "Raleway", sans-serif;
+}
+html{
+height:100%;
+}
+
+header{
+  background-color: white;
+  width:100%;
+  margin-top:-2.8%;
+  padding:1em 0 0 0.5em;
+
+  background-color: limegreen;
+}
+h1 a{
+  color:#fff;
+  text-decoration: none;
+
+
+}
+
+body{
+ /* background-color: #e0e0e0;*/
+ background-color: #f7f7f7;
+  margin: 0;
+}
+
+.wrapper{
+  width: 50%;
+  margin: 0 auto;
+  display:flex;
+  flex-direction: column;
+  height:50vh;
+}
+.main-box{
+  padding: 1em 0 1em 0;
+  background-color: white;
+  text-align: center;
+}
+form{
+  text-align:center;
+}
+input{
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 1em;
+}
+button{
+  margin-top: 1em;
+  flex-direction: column;
+  align-self: flex-end;
+
+}
