@@ -5,41 +5,45 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tournamented</title>
-  <!-- for title icon -->
- <link rel="shortcut icon" href="../public/images/megaphone.png" />
+  <!--icon in title bar-->
+  <link rel="shortcut icon" href="../public/images/circleMegaphone.png" />
+  <!-- STYLESHEETS -->
   <link href="https://fonts.googleapis.com/css?family=Lato:400,400i|Raleway:500,600" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
- <!-- TODO: CHANGE PATH AFTER PULL REQUEST -->
- <link rel="stylesheet" href="../public/styles/styles.css">
+  <!-- TODO: CHANGE PATH AFTER PULL REQUEST -->
+  <link rel="stylesheet" href="../public/styles/styles.css">
 </head>
 
-<header>
-  <h1><a href="#">Tournamented</a></h1>
-</header>
 
 <body>
-<main>
-  <div class="wrapper">
+  <header>
+  <h1><a href="#">Tournamented</a></h1>
+</header>
+  <main>
+    <div class="wrapper">
 
-  <div class = "main-box">
-<h4>Welcome</h4>
-<form>
-<input id="tourName"type="text"  name="name" placeholder="Tounament Name" />
-<input id="date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Date">
-<input id="location" type="text"  name="name" placeholder="Location" />
-<input id="roundNumber" type="number" min="1" max="10" step="1" name="roundNumber" onfocus="(this.type='number')" onblur="(this.type='text')"placeholder="Number of Rounds" size="3"/>
-<!-- <input id="roundNumber" type="number" name="roundNumber"placeholder="Number of Rounds"> -->
-</form>
+      <div class="main-box">
+        <h2>Welcome</h2>
+        <form>
+          <input id="tourName" type="text" name="name" placeholder="Tounament Name" />
+          <input id="date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Date">
+          <input id="location" type="text" name="name" placeholder="Location" />
+          <input id="roundNumber" type="number" min="1" max="10" step="1" name="roundNumber" onfocus="(this.type='number')" onblur="(this.type='text')" placeholder="Number of Rounds" size="3" />
+          <!-- <input id="roundNumber" type="number" name="roundNumber"placeholder="Number of Rounds"> -->
+        </form>
 
-   </div>
-<button><a href="index2.html">Continue</a></button>
+      </div>
+      <button><a href="setup.html">Continue</a></button>
 
-</div>
-</main>
-<!-- SCRIPTS -->
+    </div>
+  </main>
+  <!-- SCRIPTS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
   <script src="/scripts/app.js" defer></script>
-</body>
+  <footer>
+    <p>©2018 Ben Cornman & Chris Kanyotu</p>
+  </footer>
 
+</body>
 </html>
