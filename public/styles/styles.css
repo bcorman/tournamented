@@ -2,7 +2,7 @@
 * {
   -webkit-font-smoothing: antialiased;
   font-family: "Raleway", sans-serif;
-  text-decoration: none;
+
 }
 html{
   max-height: 100vh;
@@ -27,6 +27,7 @@ button:hover {
 a {
   color: #1fa8a4;
   padding: 0.5em;
+  text-decoration: none;
 }
 button a:hover {
   color: #fff;
@@ -68,9 +69,6 @@ margin-bottom:7% ;
 .main-box h2 {
 margin: 2em 0 1.5em 0;
 }
-form {
-  text-align: center;
-}
 input {
   width: 50%;
   margin: 0 auto;
@@ -102,9 +100,18 @@ footer p {
   margin: 0.5em 0 0.5em 0;
   font-size: 1em
 }
+p a{
+  text-decoration: underline;
+}
+p a:hover{
+  font-weight:800;
+}
 
 /******************************SETUP STYLES******************************/
 
 #add-school-button{
   margin-left: 1em;
 }
+
+/******************************TABS STYLES******************************/
+/*TODO add styles*/
