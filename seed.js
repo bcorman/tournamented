@@ -208,33 +208,106 @@ db.School.remove({}, (err, succ) => {
                                       //Get those Brits sorted...
 
 //Find British school, save to variable
-let britSchool
-db.School.findOne({name: `British International School`}, (err, foundSchool) => {
+ db.School.findOne({ name: 'British International School' }, (err, britSchool) => {
   if (err) { console.log(err) }
-  britSchool = foundSchool
-})
-
-//Load British School People
-db.Person.create(britishPeople, (err, brits) => {
-  if (err) { console.log(err) }
-  console.log(`loaded Brits`)
+  console.log(britSchool)
 
   //Assign School to People
-  brits.forEach( britishPerson => {
+  britishPeople.forEach( britishPerson => {
     britishPerson.affiliation = britSchool
 
     //Assign Students and Judges to school
     if (britishPerson.isJudge === false) {
-      britSchool['students']push(britishPerson)
+      britSchool['students'].push(britishPerson)
     } else {
-      britSchool['judges']push(britishPerson)
+      britSchool['judges'].push(britishPerson)
     }
   })
 
-  //Make two British teams
-  let britTeam1 = new db.Team({
-    name: 'Brit-DOS',
-    wins: 0,
-    school: britSchool,
+  //Load British School People
+  db.Person.create(britishPeople, (err, brits) => {
+    if (err) { console.log(err) }
+    console.log(`loaded Brits`)
+
+    //Make two British teams - hardcode the names and students
+    let britTeam1 = new db.Team({
+      name: 'Brit-DOS',
+      wins: 0,
+      school: britSchool,
+    })
+    let britTeam2 = new db.Team({
+      name: 'Brit-LSP',
+      wins: 0,
+      school: britSchool,
+    })
+    //Assign Students to/from teams
+
+    //Team 1
+    db.Person.findOne({lastName: `Davies`}, (err, student) => {
+      if (err) { console.log(err) }
+      britTeam1['students'].push(student)
+      student.team = britTeam1
+      student.save((err,success) => {
+        if (err) { console.log(err) }
+        console.log(`success`)
+      })
+    })
+    db.Person.findOne({lastName: `Orwell`}, (err, student) => {
+      if (err) { console.log(err) }
+      britTeam1['students'].push(student)
+      student.team = britTeam1
+      student.save((err,success) => {
+        if (err) { console.log(err) }
+        console.log(`success`)
+      })
+    })
+    db.Person.findOne({lastName: `Stewart`}, (err, student) => {
+      if (err) { console.log(err) }
+      britTeam1['students'].push(student)
+      student.team = britTeam1
+      student.save((err,success) => {
+        if (err) { console.log(err) }
+        console.log(`success`)
+      })
+    })
+
+    //Team 2
+    db.Person.findOne({lastName: `Lane`}, (err, student) => {
+      if (err) { console.log(err) }
+      britTeam2['students'].push(student)
+      student.team = britTeam2
+      student.save((err,success) => {
+        if (err) { console.log(err) }
+        console.log(`success`)
+      })
+    })
+    db.Person.findOne({lastName: `Smiley`}, (err, student) => {
+      if (err) { console.log(err) }
+      britTeam2['students'].push(student)
+      student.team = britTeam2
+      student.save((err,success) => {
+        if (err) { console.log(err) }
+        console.log(`success`)
+      })
+    })
+    db.Person.findOne({lastName: `Prideaux`}, (err, student) => {
+      if (err) { console.log(err) }
+      britTeam2['students'].push(student)
+      student.team = britTeam2
+      student.save((err,success) => {
+        if (err) { console.log(err) }
+        console.log(`success`)
+      })
+    })
+
+    //save teams
+    britTeam1.save((err,success) => {
+      if (err) { console.log(err) }
+      console.log(`success`)
+    })
+    britTeam2.save((err,success) => {
+      if (err) { console.log(err) }
+      console.log(`success`)
+    })
   })
 })
