@@ -1,8 +1,7 @@
-const mongoose = require('mongoose')
+let mongoose = require('mongoose'),
+  Schema = mongoose.Schema
 
-let Schema = mongoose.Schema
-
-const SchoolSchema = new Schema({
+let SchoolSchema = new Schema({
   name: String,
   students: [{
       type: Schema.Types.ObjectId,
@@ -18,6 +17,6 @@ const SchoolSchema = new Schema({
     }]
 })
 
-const School = mongoose.model('School', SchoolSchema)
+let School = mongoose.model('School', SchoolSchema)
 
 module.exports = School

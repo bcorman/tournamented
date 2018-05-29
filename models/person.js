@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 let Schema = mongoose.Schema
 
-const PersonSchema = new Schema({
+let PersonSchema = new Schema({
   firstName: String,
   lastName: String,
   isJudge: Boolean,
