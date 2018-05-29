@@ -14,47 +14,46 @@ let sampleSchools = [{
 }]
                                   /* British */
 let britishPeople = [{
-  firstName: 'Jimmy',
-  lastName: 'James',
+  firstName: 'Ray',
+  lastName: 'Davies',
   isJudge: false,
   isAvailable: true,
   score: 0,
 }, {
-  firstName: 'Sammy',
-  lastName: 'Smithers',
+  firstName: 'George',
+  lastName: 'Orwell',
   isJudge: false,
   isAvailable: true,
   score: 0,
 }, {
-  firstName: 'Wilson',
-  lastName: 'Rickets',
+  firstName: 'Rod',
+  lastName: 'Stewart',
   isJudge: false,
   isAvailable: true,
   score: 0,
 }, {
-  firstName: 'Jamiroquai',
-  lastName: 'Jett',
+  firstName: 'Ronnie',
+  lastName: 'Lane',
   isJudge: false,
   isAvailable: true,
   score: 0,
 }, {
-  firstName: 'Stinson',
-  lastName: 'Chapeau',
+  firstName: 'George',
+  lastName: 'Smiley',
   isJudge: false,
   isAvailable: true,
   score: 0,
 }, {
-  firstName: 'Mortimer',
-  lastName: 'Goth',
+  firstName: 'Jim',
+  lastName: 'Prideaux',
   isJudge: false,
   isAvailable: true,
   score: 0,
 }, {
-  firstName: 'Chunt',
-  lastName: 'The Badger',
+  firstName: 'Vaclav',
+  lastName: 'Paris',
   isJudge: true,
   isAvailable: true,
-  score: 0,
 }]
                             /* Foon */
 let foonPeople = [{
@@ -98,7 +97,6 @@ let foonPeople = [{
   lastName: 'LeBoeuf',
   isJudge: true,
   isAvailable: true,
-  score: 0,
 }]
                                   /* Nest */
 let nestPeople = [{
@@ -142,7 +140,6 @@ let nestPeople = [{
   lastName: 'DerVerf',
   isJudge: true,
   isAvailable: true,
-  score: 0,
 }]
                               /* Brearley */
 let brearleyPeople = [{
@@ -186,7 +183,58 @@ firstName: 'Clifford',
 lastName: 'York',
 isJudge: true,
 isAvailable: true,
-score: 0,
 }]
 
-// Seed Functions
+// Seed Function
+
+//Remove all schools...
+
+db.School.remove({}, (err, succ) => {
+  if (err) { console.log(err) }
+  console.log(`removed all schools`)
+
+  //Create all schools
+  db.School.create(sampleSchools, (err, newSchools) => {
+    if (err) { console.log(err) }
+    console.log(`created schools`)
+
+    //Remove all people
+    db.Person.remove({}, (err, succ) => {
+      if (err) { console.log(err) }
+      console.log(`removed all people`)
+    })
+  })
+})
+                                      //Get those Brits sorted...
+
+//Find British school, save to variable
+let britSchool
+db.School.findOne({name: `British International School`}, (err, foundSchool) => {
+  if (err) { console.log(err) }
+  britSchool = foundSchool
+})
+
+//Load British School People
+db.Person.create(britishPeople, (err, brits) => {
+  if (err) { console.log(err) }
+  console.log(`loaded Brits`)
+
+  //Assign School to People
+  brits.forEach( britishPerson => {
+    britishPerson.affiliation = britSchool
+
+    //Assign Students and Judges to school
+    if (britishPerson.isJudge === false) {
+      britSchool['students']push(britishPerson)
+    } else {
+      britSchool['judges']push(britishPerson)
+    }
+  })
+
+  //Make two British teams
+  let britTeam1 = new db.Team({
+    name: 'Brit-DOS',
+    wins: 0,
+    school: britSchool,
+  })
+})
