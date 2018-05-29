@@ -1,0 +1,333 @@
+/*COMMON CONTENT SYLES*/
+* {
+  -webkit-font-smoothing: antialiased;
+  font-family: "Raleway", sans-serif;
+}
+html {
+  max-height: 100vh;
+}
+body {
+  background-color: #efefef;
+  margin: 0em;
+}
+a {
+  color: #1fa8a4;
+  padding: 0.5em;
+  text-decoration: none;
+}
+/*button settings*/
+button {
+  margin-top: 1.5em;
+  font-size: 1em;
+  color: #1fa8a4;
+  border: 0.15em solid;
+  border-color: #1fa8a4;
+  padding: 0.5em;
+}
+button:hover {
+  color: #fff;
+  background-color: #1fa8a4;
+  transition: 0.3s ease-in-out;
+}
+button a:hover {
+  color: #fff;
+}
+.inner-buttons {
+  padding: 0.25em;
+}
+.nav-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.continue-button {
+  align-self: flex-end;
+}
+.back-button {
+  align-self: flex-start;
+}
+
+ul {
+  list-style-type: none;
+  flex-direction: column;
+  padding: 0;
+}
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/*HEADER*/
+header {
+  background-color: white;
+  width: 100%;
+  background-color: #1fa8a4;
+  padding: 0.5em 0 0 0;
+}
+header h1 {
+  margin-top: 0;
+  padding-bottom: 0.2em;
+}
+h1 a {
+  color: #fff;
+}
+
+/*CONTENT BOX STYLES*/
+main {
+}
+.wrapper {
+  width: 40%;
+  margin: 0 auto;
+  margin-top: 9%;
+  margin-bottom: 7%;
+  display: flex;
+  flex-direction: column;
+}
+.main-box {
+  padding: 1em 0 1em 0;
+  background-color: white;
+  text-align: center;
+  height: 50vh;
+  margin: auto 0
+}
+
+/* FOOTER  */
+footer {
+  background-color: transparent;
+  color: #1fa8a4;
+  border-top: solid 0.1em;
+  padding-left: 1em;
+  text-align: center;
+}
+footer p {
+  margin: 0.5em 0 0.5em 0;
+  font-size: 1em;
+}
+p a {
+  text-decoration: underline;
+}
+p a:hover {
+  font-weight: 800;
+}
+/******************************INDEX STYLES******************************/
+
+.main-box h2 {
+  margin: 1em 0 1em 0;
+}
+form {
+  margin-top: 3em;
+}
+input {
+  width: 50%;
+  margin: 0 auto;
+  font-size: 1.4em;
+  margin-top: 1em;
+  text-align: center;
+  border-radius: 25px;
+  border: 1px solid #cccccc;
+}
+/*get rid of blue border highlight when input field is clicked*/
+input:focus {
+  outline-width: 0;
+}
+
+/******************************SETUP STYLES******************************/
+
+/*CONTENT BOX STYLES*/
+#add-school-button {
+  margin-left: 1em;
+}
+/******************************TABS STYLES******************************/
+/*CONTENT BOX STYLES*/
+.tabs-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin: 0 1em;
+}
+.tabs-rows {
+  flex-direction: row;
+  display: flex;
+  justify-content: space-between;
+}
+.boxes {
+  flex-direction: column;
+  border: solid 1px #c6c6c6;
+}
+.boxes button {
+  margin-bottom: 0.5em;
+}
+#first-row {
+  margin-bottom: 1em;
+}
+.participants {
+  width: 60%;
+}
+.lists {
+  width: 35%;
+}
+/******************************PAIRINGS STYLES******************************/
+
+/*CONTENT BOX STYLES*/
+#enter-title {
+  margin-bottom: 0.5em;
+}
+.pairings {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  margin: 0 auto;
+  height:75%;
+}
+.opponents {
+  flex-direction: column;
+}
+.prop-col {
+  width: 45%;
+}
+.vs-col {
+  font-weight: 900;
+  width: 10%;
+}
+.opp-col {
+  width: 45%;
+}
+
+.opponents ul li {
+  padding-bottom: 0.5%;
+}
+/******************************RESULTS STYLES******************************/
+
+/*CONTENT BOX STYLES*/
+.col-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 85%;
+  margin: 0 auto;
+
+  /*padding-bottom: 5em;*/
+}
+.res-left-col {
+  width: 60%;
+  flex-direction: column;
+  height: 70%;
+}
+.prop-box {
+  height: 7em;
+}
+.opp-box {
+  height: 7em;
+  margin: 1.5em 0 2em 0;
+
+}
+.res-right-col {
+  width: 35%;
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+}
+.deblist-box{
+height:%;
+}
+.student-score-box {
+  display: flex;
+  flex-direction: row;
+}
+.student-score-list {
+  flex-direction: column;
+  width: 60%;
+  margin: 0 auto;
+  margin-left: 0;
+}
+.student-score-list ul {
+  margin-top: 12%;
+}
+.student-score-list ul li {
+  margin: 6% 0;
+}
+.student-scores {
+  flex-direction: column;
+  width: 30%;
+}
+.student-scores h5 {
+  margin: 0;
+  font-weight: 900;
+}
+.student-scores input {
+  font-size: 0.4em;
+  border-radius: 25px;
+  border: 1px solid #cccccc;
+  margin: 0 auto;
+  font-size: 1em;
+  margin-top: 0.5em;
+  text-align: center;
+}
+.winner {
+  flex-direction: column;
+  background-color: #f7fffe;
+  margin-top: 1em;
+}
+.winner button {
+  margin-top: 0.5em;
+}
+h4 {
+  margin: 0;
+  text-decoration: underline;
+  font-weight: 900;
+}
+#add-res-button{
+ width:65%;
+ margin-left: auto;
+}
+
+/******************************AWARDS STYLES******************************/
+.award-box{
+  display: flex;
+  flex-direction: row;
+  width:100%;
+}
+.award-left-col{
+flex-direction: column;
+width: 50%;
+margin: 0 auto;
+}
+.award-right-col{
+flex-direction: column;
+width: 50%;
+margin: 0 auto;
+margin-top: 0.5em;
+}
+.award-left-col{
+  margin: 0.5em 0;
+  border-right:solid 1px;
+}
+.score-columns{
+  display: flex;
+  flex-direction: row;
+  width: 60%;
+  margin: 0 auto;
+  margin-top:1em;
+  margin-bottom:0.5em;
+  height:85%;
+}
+.score-left{
+  flex-direction:column;
+  width: 60%;
+  margin: 0 auto;
+  padding-left: 0.5em;
+}
+.score-right{
+  flex-direction:column;
+  width: 40%;
+  margin: 0 auto;
+}
+.win-column{
+  width:70%;
+  margin: 0 auto;
+  height:85%;
+}
+.school-wins{
+  padding-left: 0.5em;
+}
+.school-wins li{
+margin-bottom:1em;
+}
