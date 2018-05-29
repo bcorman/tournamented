@@ -22,25 +22,26 @@
     <div class="wrapper">
       <div class="main-box">
 
-        <h2>Enter Results</h2>
+        <h2 id="enter-title">Enter Results</h2>
 
 
         <div class ="results-container">
 
-          <div class ="res-left-col">
+          <div class ="res-left-col boxes">
 
-            <div class ="prop-box">
+            <div class ="prop-box opponents">
               <h4>Proposition</h4>
 
               <div class="student-score-box">
                    <div class = "student-score-list">
                   <ul>
-                    <li>Student Name</li>
-                    <li>Student Name</li>
-                    <li>Student Name</li>
+                    <li>Student Name:</li>
+                    <li>Student Name:</li>
+                    <li>Student Name:</li>
                   </ul>
                 </div>
                 <div class ="student-scores">
+                  <h5>Scores:</h5>
                   <input type="number" min="60" max="100" step="1" >
                   <input type="number" min="60" max="100" step="1" >
                   <input type="number" min="60" max="100" step="1" >
@@ -50,37 +51,39 @@
 
             </div>
 
-<hr width="50%">
 
 
-            <div class ="opp-box">
+
+            <div class ="opp-box opponents">
               <h4>Opposition</h4>
 
               <div class="student-score-box">
                 <div class = "student-score-list">
                   <ul>
-                    <li>Student Name</li>
-                    <li>Student Name</li>
-                    <li>Student Name</li>
+                    <li>Student Name:</li>
+                    <li>Student Name:</li>
+                    <li>Student Name:</li>
                   </ul>
                 </div>
 
                 <div class ="student-scores">
-                  <input type="number" min="60" max="100" step="1" >
-                  <input type="number" min="60" max="100" step="1" >
-                  <input type="number" min="60" max="100" step="1" >
+                  <h5>Scores:</h5>
+                  <input type="number" min="60" max="100" >
+                  <input type="number" min="60" max="100" >
+                  <input type="number" min="60" max="100" >
                 </div>
 
 
               </div>
-<div class="winner boxes">
+
+            </div>
+            <div class="winner boxes" >
                   <h4>Winner</h4>
                   <div class="winner-buttons">
-                    <button class ="win-button inner-buttons"><a href="#">PROP</a></button>
-                    <button class ="win-button inner-buttons"><a href="#">OPP</a></button>
+                    <button class ="win-button inner-buttons"><a href="#">Prop</a></button>
+                    <button class ="win-button inner-buttons"><a href="#">Opp</a></button>
                   </div>
                 </div>
-            </div>
 
           </div>
 
@@ -99,32 +102,26 @@
                 <li>ABV v XYZ</li>
                 <li>ABV v XYZ</li>
                 <li>ABV v XYZ</li>
+                <li>ABV v XYZ</li>
               </ul>
             </div>
-            <button class = "inner-buttons" id="add-score">Add Result</button>
+            <button class = "inner-buttons" id="add-res-button">Add Result</button>
           </div>
-
         </div>
-
-
-
-
-
-
-
-
       </div>
       <button class ="continue-button"><a href="Awards.html">View Awards</a></button>
     </div>
   </main>
 
-  <p> ©2018 <a href="#">Ben Cornman</a> & <a href="https://www.linkedin.com/in/chris-kanyotu/">Chris Kanyotu</a></p>
+  <footer>
+    <p> ©2018 <a href="#">Ben Cornman</a> & <a href="https://www.linkedin.com/in/chris-kanyotu/">Chris Kanyotu</a></p>
   </footer>
+
   <!-- SCRIPTS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
   <script src="/scripts/app.js" defer></script>
-  <footer>
+
 </body>
 
 </html>
