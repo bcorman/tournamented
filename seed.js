@@ -274,10 +274,6 @@ let seedDatabase = () => {
     if (err) { console.log(err) }
     console.log(`removed all schools`)
 
-    db.Person.remove({}, (err, succ) => {
-      if (err) { console.log(err) }
-      console.log(`removed all people`)
-
       db.Team.remove({}, (err, succ) => {
         if (err) { console.log(err) }
         console.log(`removed all teams`)
