@@ -1,8 +1,8 @@
 const mongoose = require('mongoose')
 
-let Schema = mongoose.Schema
+const Schema = mongoose.Schema
 
-let PersonSchema = new Schema({
+const PersonSchema = new Schema({
   firstName: String,
   lastName: String,
   isJudge: Boolean,
