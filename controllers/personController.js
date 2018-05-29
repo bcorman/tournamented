@@ -10,9 +10,9 @@ const db = require('../models/')
 
 /*CRUD Functions
 
-Create - To Do
+Create - Added
 Read - Added
-Update - To Do
+Update - Added
 Destroy - Added
 */
 
@@ -20,7 +20,7 @@ module.exports = {
   index: (req, res) => {
     //get all people
     db.Person.find({})
-    //not currently sure if populate is necessary. Adding anyway.
+    //populate
       .populate('affiliation')
       .populate('team')
       .exec((err, people) => {
@@ -30,13 +30,17 @@ module.exports = {
       })
   },
   create: (req, res) => {
-    console.log(`This function has yet to be written`)
+    db.Person.create(req.body, (err, newPerson) => {
+      if (err) { console.log(err) }
+      console.log(`${newPerson} created`)
+      res.json(newPerson)
+    })
   },
   show: (req, res) => {
     //get single person
-    let id = req.body.id
+    let id = req.params.id
     db.Person.findById(id)
-      //again, populate may be unnecessary
+      //populate
       .populate('affiliation')
       .populate('team')
       .exec((err, person) => {
@@ -46,7 +50,7 @@ module.exports = {
     })
   },
   destroy: (req, res) => {
-    let id = req.body.id
+    let id = req.params.id
     db.Person.findByIdAndRemove(id, (err, success) => {
       if (err) { console.log(err) }
       console.log(`Person removed`)
@@ -54,6 +58,11 @@ module.exports = {
     })
   },
   update: (req, res) => {
-    console.log(`This function has yet to be written`)
+    let id = req.params.id
+    db.Person.findByIdAndUpdate(id, req.body, (err, updatedPerson) => {
+      if (err) { console.log(err) }
+      console.log(`${updatedPerson} updated`)
+      res.json(updatedPerson)
+    })
   }
 }

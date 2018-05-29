@@ -24,7 +24,7 @@
       <div  class="main-box">
         <h2>Welcome</h2>
         <form>
-          <input id="tourName" type="text" name="name" placeholder="Tounament Name" />
+          <input id="tourName" type="text" name="name" placeholder="Tournament Name" />
           <input id="date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Date">
           <input id="location" type="text" name="name" placeholder="Location" />
           <input id="roundNumber" type="number" min="1" max="10" name="roundNumber" onfocus="(this.type='number')" onblur="(this.type='text')" placeholder="Number of Rounds" size="3" />
@@ -33,7 +33,7 @@
       </div>
 
 
-      <button class ="continue-button"><a href="setup.html">Continue</a></button>
+      <button class="continue-button" id='continue-landing'>Continue</button>
 
 
     </div>
@@ -46,7 +46,8 @@
   <!-- SCRIPTS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
-  <script src="scripts/app.js" defer></script>
+  <!-- <script src="scripts/app.js"></script> -->
+  <script src="scripts/ajaxScripts.js"></script>
 </body>
 
 </html>

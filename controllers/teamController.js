@@ -10,9 +10,9 @@ const db = require('../models/')
 
 /*CRUD Functions
 
-Create - To Do
+Create - Added
 Read - Added
-Update - To Do
+Update - Added
 Destroy - Added
 */
 
@@ -22,7 +22,6 @@ module.exports = {
     db.Team.find({})
     //not currently sure if populate is necessary. Adding anyway.
       .populate('debates')
-      .populate('student')
       .populate('schools')
       .exec((err, teams) => {
         if (err) { console.log(err) }
@@ -31,15 +30,18 @@ module.exports = {
       })
   },
   create: (req, res) => {
-    console.log(`This function has yet to be written`)
+    db.Team.create(req.body, (err, newTeam) => {
+      if (err) { console.log(err) }
+      console.log(newTeam)
+      res.json(newTeam)
+    })
   },
   show: (req, res) => {
     //get single team
-    let id = req.body.id
+    let id = req.params.id
     db.Team.findById(id)
       //again, populate may be unnecessary
       .populate('debates')
-      .populate('students')
       .populate('schools')
       .exec((err, team) => {
         if (err) { console.log(err) }
@@ -48,7 +50,7 @@ module.exports = {
     })
   },
   destroy: (req, res) => {
-    let id = req.body.id
+    let id = req.params.id
     db.Team.findByIdAndRemove(id, (err, success) => {
       if (err) { console.log(err) }
       console.log(`Team removed`)
@@ -56,6 +58,11 @@ module.exports = {
     })
   },
   update: (req, res) => {
-    console.log(`This function has yet to be written`)
+    let id = req.params.id
+    db.findByIdAndUpdate(id, req.body, (err, updatedTeam) => {
+      if (err) { console.log(err) }
+      console.log(`Updated ${updatedTeam}`)
+      res.json(updatedTeam)
+    })
   }
 }
