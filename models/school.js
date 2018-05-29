@@ -3,17 +3,9 @@ let mongoose = require('mongoose'),
 
 let SchoolSchema = new Schema({
   name: String,
-  students: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Person'
-    }],
   teams: [{
       type: Schema.Types.ObjectId,
       ref: 'Team'
-    }],
-  judges: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Person'
     }]
 })
 
