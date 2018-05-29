@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css?family=Lato:400,400i|Raleway:500,600" rel="stylesheet">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css" integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
   <!-- TODO: CHANGE PATH AFTER PULL REQUEST -->
-  <link rel="stylesheet" href="../public/styles/styles.css">
+  <link rel="stylesheet" type="text/css" href="styles/styles.css">
 </head>
 
 <body>
@@ -21,14 +21,13 @@
   <main>
     <div class="wrapper">
 
-      <div class="main-box">
+      <div  class="main-box">
         <h2>Welcome</h2>
         <form>
           <input id="tourName" type="text" name="name" placeholder="Tounament Name" />
           <input id="date" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Date">
           <input id="location" type="text" name="name" placeholder="Location" />
           <input id="roundNumber" type="number" min="1" max="10" name="roundNumber" onfocus="(this.type='number')" onblur="(this.type='text')" placeholder="Number of Rounds" size="3" />
-          <!-- <input id="roundNumber" type="number" name="roundNumber"placeholder="Number of Rounds"> -->
         </form>
 
       </div>
@@ -47,7 +46,7 @@
   <!-- SCRIPTS -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
-  <script src="/scripts/app.js" defer></script>
+  <script src="scripts/app.js" defer></script>
 </body>
 
 </html>
