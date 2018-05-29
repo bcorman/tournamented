@@ -185,20 +185,15 @@ isJudge: true,
 isAvailable: true
 }]
 
-// Seed Function
+// Seed Functions
 
 //Remove all schools, people, teams
 
-db.School.remove({}, (err, succ) => {
-  if (err) { console.log(err) }
-  console.log(`removed all schools`)
-
-  //Create all schools
-  db.School.create(sampleSchools, (err, success) => {
+let clearAll = () => {
+  db.School.remove({}, (err, succ) => {
     if (err) { console.log(err) }
-    console.log(`created schools`)
+    console.log(`removed all schools`)
 
-    //Remove all people
     db.Person.remove({}, (err, succ) => {
       if (err) { console.log(err) }
       console.log(`removed all people`)
@@ -210,118 +205,128 @@ db.School.remove({}, (err, succ) => {
         db.Debate.remove({}, (err, succ) => {
           if (err) { console.log(err) }
           console.log(`removed all debates`)
+        })
+      })
+    })
+  })
+}
 
+// Create all schools
+let createSchools = (schools) => {
 
+  db.School.create(schools, (err, success) => {
+    if (err) { console.log(err) }
+    console.log(`created schools`)
+  })
+}
 
-                                           //Get Brits sorted...
+//Find specific school by name
+let findSchool = (schoolName) => {
+  db.School.findOne({ name: schoolName }, (err, school) => {
+    if (err) { console.log(err) }
+    console.log(`found ${school}`)
+    return school
+  })
+}
+//Team assignment functions
+let assignTeams = (teamName1, teamName2, school, personArray) => {
+  let team1 = new db.Team({
+    name: teamName1,
+    wins: 0,
+    school: school
+  })
+  let team2 = new db.Team({
+    name: teamName2,
+    wins: 0,
+    school: school
+  })
 
-          //Load British School People
-          db.Person.create(britishPeople, (err, brits) => {
+  for (let i = 0; i < 3; i++ ) {
+    personArray[i].team = team1
+  }
+  for (let i = 3; i< 7; i++) {
+    personArray[i].team = team2
+  }
+
+  team1.save((err, succ) => {
+    if (err) { console.log(err) }
+    console.log(`saved ${teamName1}`)
+  })
+  team2.save((err, succ) => {
+    if (err) { console.log(err) }
+    console.log(`saved ${teamName2}`)
+  })
+  console.log(`${school.name} teams saved`)
+}
+
+//School assignment function
+
+let assignSchool = (personArray, school) => {
+  personArray.forEach( person => {
+    person.affiliation = school
+    console.log(`${person.firstName} ${person.lastName} assigned to ${school.name}`)
+  })
+}
+
+let seedDatabase = () => {
+
+  db.School.remove({}, (err, succ) => {
+    if (err) { console.log(err) }
+    console.log(`removed all schools`)
+
+      db.Team.remove({}, (err, succ) => {
+        if (err) { console.log(err) }
+        console.log(`removed all teams`)
+
+        db.Debate.remove({}, (err, succ) => {
+          if (err) { console.log(err) }
+          console.log(`removed all debates`)
+
+          db.School.create(sampleSchools, (err, success) => {
             if (err) { console.log(err) }
-            console.log(`loaded Brits`)
+            console.log(`created schools`)
 
-            //Find British school
-            db.School.findOne({ name: 'British International School' }, (err, britSchool) => {
-              if (err) { console.log(err) }
-              console.log(`${britSchool} found`)
+                let britishSchool = success[0]
+                let foonSchool = success[1]
+                let nestSchool = success[2]
+                let brearleySchool = success[3]
 
-            //find Brits
-            db.Person.find({}, (err, foundBrits) => {
+              //assign schools
 
-              //Assign School to Brits
-              foundBrits.forEach( britishPerson => {
-                britishPerson.affiliation = britSchool
+                assignSchool(britishPeople, britishSchool)
+                assignSchool(foonPeople, foonSchool)
+                assignSchool(nestPeople, nestSchool)
+                assignSchool(brearleyPeople, brearleySchool)
 
-                //Assign Students and Judges to school
-                if (britishPerson.isJudge === false) {
-                  britSchool['students'].push(britishPerson)
-                } else {
-                  britSchool['judges'].push(britishPerson)
-                }
-              })
-            })
+              //assign teams and save
+                assignTeams('British-DOS', 'British-LSP', britishSchool, britishPeople)
+                assignTeams('Foon-BYH', 'Foon-MCL', foonSchool, foonPeople)
+                assignTeams('Nest-RSA', 'Nest-BBL', nestSchool, nestPeople)
+                assignTeams('Brearley-SKT', 'Brearley-SGA', brearleySchool, brearleyPeople)
 
-
-              //Make two British teams - hardcode the names and students
-              let britTeam1 = new db.Team({
-                name: 'Brit-DOS',
-                wins: 0,
-                school: britSchool
-              })
-              let britTeam2 = new db.Team({
-                name: 'Brit-LSP',
-                wins: 0,
-                school: britSchool
-              })
-
-              //Assign Students to/from teams
-
-              //Team 1
-              db.Person.findOne({lastName: `Davies`}, (err, student) => {
+              //create people
+              db.Person.create(britishPeople, (err, newBrits) => {
                 if (err) { console.log(err) }
-                britTeam1['students'].push(student)
-                student.team = britTeam1
-                student.save((err,success) => {
-                  if (err) { console.log(err) }
-                  console.log(`Ray Davies loaded`)
+                newBrits.forEach( brit => {
+                  console.log(`created ${brit.firstName} ${brit.lastName}`)
                 })
-              })
-              db.Person.findOne({lastName: `Orwell`}, (err, student) => {
-                if (err) { console.log(err) }
-                britTeam1['students'].push(student)
-                student.team = britTeam1
-                student.save((err,success) => {
+                db.Person.create(foonPeople, (err, newFoons) => {
                   if (err) { console.log(err) }
-                  console.log(`George Orwell is waiting`)
+                  newFoons.forEach( foony => {
+                    console.log(`created ${foony.firstName} ${foony.lastName}`)
+                  })
+                  db.Person.create(nestPeople, (err, newNest) => {
+                    if (err) { console.log(err) }
+                    newNest.forEach( nester => {
+                      console.log(`created ${nester.firstName} ${nester.lastName}`)
+                    })
+                    db.Person.create(brearleyPeople, (err, newBrearleys) => {
+                      if (err) { console.log(err) }
+                      newBrearleys.forEach( brearlier => {
+                        console.log(`created ${brearlier.firstName} ${brearlier.lastName}`)
+                    })
+                  })
                 })
-              })
-              db.Person.findOne({lastName: `Stewart`}, (err, student) => {
-                if (err) { console.log(err) }
-                britTeam1['students'].push(student)
-                student.team = britTeam1
-                student.save((err,success) => {
-                  if (err) { console.log(err) }
-                  console.log(`Rod Stewart has arrived`)
-                })
-              })
-
-              //Team 2
-              db.Person.findOne({lastName: `Lane`}, (err, student) => {
-                if (err) { console.log(err) }
-                britTeam2['students'].push(student)
-                student.team = britTeam2
-                student.save((err,success) => {
-                  if (err) { console.log(err) }
-                  console.log(`Ronnie Lane is here`)
-                })
-              })
-              db.Person.findOne({lastName: `Smiley`}, (err, student) => {
-                if (err) { console.log(err) }
-                britTeam2['students'].push(student)
-                student.team = britTeam2
-                student.save((err,success) => {
-                  if (err) { console.log(err) }
-                  console.log(`Smiley's People`)
-                })
-              })
-              db.Person.findOne({lastName: `Prideaux`}, (err, student) => {
-                if (err) { console.log(err) }
-                britTeam2['students'].push(student)
-                student.team = britTeam2
-                student.save((err,success) => {
-                  if (err) { console.log(err) }
-                  console.log(`Prideaux waits`)
-                })
-              })
-
-              //save teams
-              britTeam1.save((err,success) => {
-                if (err) { console.log(err) }
-                console.log(`team1 saved`)
-              })
-              britTeam2.save((err,success) => {
-                if (err) { console.log(err) }
-                console.log(`team2 saved`)
               })
             })
           })
@@ -329,4 +334,8 @@ db.School.remove({}, (err, succ) => {
       })
     })
   })
-})
+}
+
+// Function Calls
+
+seedDatabase()

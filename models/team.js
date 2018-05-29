@@ -9,10 +9,6 @@ const TeamSchema = new Schema({
        type: Schema.Types.ObjectId,
        ref: 'Debate'
      }],
-  students: [{
-       type: Schema.Types.ObjectId,
-       ref: 'Person'
-     }],
   school: {
       type: Schema.Types.ObjectId,
       ref: 'School'
