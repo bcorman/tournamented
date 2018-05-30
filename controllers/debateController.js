@@ -10,10 +10,10 @@ const db = require('../models/')
 
 /*CRUD Functions
 
-Create - debates are generated when teams are paired, not through this controller
-Read - Added.
-Update - function not needed for Minimum Viable Product
-Destroy - not needed for MVP
+Create - Added
+Read - Added
+Update - Added
+Destroy - Added
 */
 
 module.exports = {
@@ -31,7 +31,11 @@ module.exports = {
       })
   },
   create: (req, res) => {
-    console.log(`This function will not likely be written`)
+    db.Debate.create(req.body, (err, newDebate) => {
+      if (err) { console.log(err) }
+      console.log(newDebate)
+      res.json(newDebate)
+    })
   },
   show: (req, res) => {
     //get single debate
@@ -56,6 +60,11 @@ module.exports = {
     })
   },
   update: (req, res) => {
-    console.log(`This function has yet to be written`)
+    let id = req.params.id
+    db.Debate.findByIdAndUpdate(id, req.body, (err, updatedDebate) => {
+      if (err) { console.log(err) }
+      console.log(updatedDebate)
+      res.json(updatedDebate)
+    })
   }
 }

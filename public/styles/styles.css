@@ -331,3 +331,11 @@ margin-top: 0.5em;
 .school-wins li{
 margin-bottom:1em;
 }
+
+.noDisplay {
+  display: none;
+}
+
+.display {
+  display: flex;
+}

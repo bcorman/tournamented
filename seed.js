@@ -4,13 +4,17 @@ var db = require('./models')
 // 4 schools with 6 students and 1 judge each - sufficient for 8 total debate teams/ 4 total debates.
 
 let sampleSchools = [{
-  name: 'British International School'
+  name: 'British International School',
+  number: 1
 }, {
-  name: 'Foon Wizard Academy'
+  name: 'Foon Wizard Academy',
+  number: 2
 }, {
-  name: 'NEST'
+  name: 'NEST',
+  number: 3
 }, {
-  name: 'Brearley School'
+  name: 'Brearley School',
+  number: 4
 }]
                                   /* British */
 const britishPeople = [{
@@ -187,29 +191,6 @@ isAvailable: true
 
 // Seed Functions
 
-//Remove all schools, people, teams
-
-let clearAll = () => {
-  db.School.remove({}, (err, succ) => {
-    if (err) { console.log(err) }
-    console.log(`removed all schools`)
-
-    db.Person.remove({}, (err, succ) => {
-      if (err) { console.log(err) }
-      console.log(`removed all people`)
-
-      db.Team.remove({}, (err, succ) => {
-        if (err) { console.log(err) }
-        console.log(`removed all teams`)
-
-        db.Debate.remove({}, (err, succ) => {
-          if (err) { console.log(err) }
-          console.log(`removed all debates`)
-        })
-      })
-    })
-  })
-}
 
 // Create all schools
 let createSchools = (schools) => {
@@ -282,27 +263,31 @@ let seedDatabase = () => {
           if (err) { console.log(err) }
           console.log(`removed all debates`)
 
-          db.School.create(sampleSchools, (err, success) => {
+          db.Person.remove({}, (err, succ) => {
             if (err) { console.log(err) }
-            console.log(`created schools`)
+            console.log(`removed all people`)
 
-                let britishSchool = success[0]
-                let foonSchool = success[1]
-                let nestSchool = success[2]
-                let brearleySchool = success[3]
+            db.School.create(sampleSchools, (err, success) => {
+              if (err) { console.log(err) }
+              console.log(`created schools`)
+
+              let britishSchool = success[0]
+              let foonSchool = success[1]
+              let nestSchool = success[2]
+              let brearleySchool = success[3]
 
               //assign schools
 
-                assignSchool(britishPeople, britishSchool)
-                assignSchool(foonPeople, foonSchool)
-                assignSchool(nestPeople, nestSchool)
-                assignSchool(brearleyPeople, brearleySchool)
+              assignSchool(britishPeople, britishSchool)
+              assignSchool(foonPeople, foonSchool)
+              assignSchool(nestPeople, nestSchool)
+              assignSchool(brearleyPeople, brearleySchool)
 
               //assign teams and save
-                assignTeams('British-DOS', 'British-LSP', britishSchool, britishPeople)
-                assignTeams('Foon-BYH', 'Foon-MCL', foonSchool, foonPeople)
-                assignTeams('Nest-RSA', 'Nest-BBL', nestSchool, nestPeople)
-                assignTeams('Brearley-SKT', 'Brearley-SGA', brearleySchool, brearleyPeople)
+              assignTeams('British-DOS', 'British-LSP', britishSchool, britishPeople)
+              assignTeams('Foon-BYH', 'Foon-MCL', foonSchool, foonPeople)
+              assignTeams('Nest-RSA', 'Nest-BBL', nestSchool, nestPeople)
+              assignTeams('Brearley-SKT', 'Brearley-SGA', brearleySchool, brearleyPeople)
 
               //create people
               db.Person.create(britishPeople, (err, newBrits) => {
@@ -324,17 +309,18 @@ let seedDatabase = () => {
                       if (err) { console.log(err) }
                       newBrearleys.forEach( brearlier => {
                         console.log(`created ${brearlier.firstName} ${brearlier.lastName}`)
+                      })
                     })
                   })
                 })
               })
             })
           })
+
         })
       })
     })
-  })
-}
+  }
 
 // Function Calls
 
