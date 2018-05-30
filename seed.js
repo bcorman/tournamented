@@ -4,13 +4,17 @@ var db = require('./models')
 // 4 schools with 6 students and 1 judge each - sufficient for 8 total debate teams/ 4 total debates.
 
 let sampleSchools = [{
-  name: 'British International School'
+  name: 'British International School',
+  number: 1
 }, {
-  name: 'Foon Wizard Academy'
+  name: 'Foon Wizard Academy',
+  number: 2
 }, {
-  name: 'NEST'
+  name: 'NEST',
+  number: 3
 }, {
-  name: 'Brearley School'
+  name: 'Brearley School',
+  number: 4
 }]
                                   /* British */
 const britishPeople = [{
@@ -187,29 +191,6 @@ isAvailable: true
 
 // Seed Functions
 
-//Remove all schools, people, teams
-
-let clearAll = () => {
-  db.School.remove({}, (err, succ) => {
-    if (err) { console.log(err) }
-    console.log(`removed all schools`)
-
-    db.Person.remove({}, (err, succ) => {
-      if (err) { console.log(err) }
-      console.log(`removed all people`)
-
-      db.Team.remove({}, (err, succ) => {
-        if (err) { console.log(err) }
-        console.log(`removed all teams`)
-
-        db.Debate.remove({}, (err, succ) => {
-          if (err) { console.log(err) }
-          console.log(`removed all debates`)
-        })
-      })
-    })
-  })
-}
 
 // Create all schools
 let createSchools = (schools) => {
@@ -333,8 +314,7 @@ let seedDatabase = () => {
         })
       })
     })
-  })
-}
+  }
 
 // Function Calls
 

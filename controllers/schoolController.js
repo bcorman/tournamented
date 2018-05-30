@@ -1,6 +1,7 @@
 // tell server to look at index.js
-const express = require('express'),
-bodyParser = require('body-parser')
+const express = require('express')
+
+const bodyParser = require('body-parser')
 
 //Get express
 const app = express()
@@ -26,9 +27,18 @@ module.exports = {
       })
   },
   create: (req, res) => {
-    db.School.create(req.body, (err, newSchool) => {
+    db.School.findOne(req.body, (err, found) => {
       if (err) { console.log(err) }
-      res.json(newSchool)
+      if (found === null) {
+        db.School.create(req.body, (err, newSchool) => {
+            newSchool.name = req.body
+            if (err) { console.log(err) }
+            console.log(req.body)
+            console.log(newSchool)
+            res.json(newSchool)
+
+        })
+      }
     })
   },
   show: (req, res) => {

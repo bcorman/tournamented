@@ -31,16 +31,20 @@ app.get('/api', controllers.api.index)
 
 //School
 app.get('/api/schools', controllers.school.index)
-app.get('/api/schools/:id', controllers.school.index)
+app.get('/api/schools/:id', controllers.school.show)
+app.post('/api/schools', controllers.school.create)
 //Person
 app.get('/api/persons', controllers.person.index)
-app.get('/api/persons/:id', controllers.person.index)
+app.get('/api/persons/:id', controllers.person.show)
+app.post('/api/person', controllers.person.create)
 //Team
 app.get('/api/teams', controllers.team.index)
-app.get('/api/teams/:id', controllers.team.index)
+app.get('/api/teams/:id', controllers.team.show)
+app.post('/api/teams', controllers.team.create)
 //Debate
 app.get('/api/debates', controllers.person.index)
-app.get('/api/debates/:id', controllers.person.index)
+app.get('/api/debates/:id', controllers.person.show)
+app.post('/api/debates', controllers.debate.create)
 
 
 //listen to port 3000. Log success to console.
