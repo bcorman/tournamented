@@ -263,27 +263,31 @@ let seedDatabase = () => {
           if (err) { console.log(err) }
           console.log(`removed all debates`)
 
-          db.School.create(sampleSchools, (err, success) => {
+          db.Person.remove({}, (err, succ) => {
             if (err) { console.log(err) }
-            console.log(`created schools`)
+            console.log(`removed all people`)
 
-                let britishSchool = success[0]
-                let foonSchool = success[1]
-                let nestSchool = success[2]
-                let brearleySchool = success[3]
+            db.School.create(sampleSchools, (err, success) => {
+              if (err) { console.log(err) }
+              console.log(`created schools`)
+
+              let britishSchool = success[0]
+              let foonSchool = success[1]
+              let nestSchool = success[2]
+              let brearleySchool = success[3]
 
               //assign schools
 
-                assignSchool(britishPeople, britishSchool)
-                assignSchool(foonPeople, foonSchool)
-                assignSchool(nestPeople, nestSchool)
-                assignSchool(brearleyPeople, brearleySchool)
+              assignSchool(britishPeople, britishSchool)
+              assignSchool(foonPeople, foonSchool)
+              assignSchool(nestPeople, nestSchool)
+              assignSchool(brearleyPeople, brearleySchool)
 
               //assign teams and save
-                assignTeams('British-DOS', 'British-LSP', britishSchool, britishPeople)
-                assignTeams('Foon-BYH', 'Foon-MCL', foonSchool, foonPeople)
-                assignTeams('Nest-RSA', 'Nest-BBL', nestSchool, nestPeople)
-                assignTeams('Brearley-SKT', 'Brearley-SGA', brearleySchool, brearleyPeople)
+              assignTeams('British-DOS', 'British-LSP', britishSchool, britishPeople)
+              assignTeams('Foon-BYH', 'Foon-MCL', foonSchool, foonPeople)
+              assignTeams('Nest-RSA', 'Nest-BBL', nestSchool, nestPeople)
+              assignTeams('Brearley-SKT', 'Brearley-SGA', brearleySchool, brearleyPeople)
 
               //create people
               db.Person.create(britishPeople, (err, newBrits) => {
@@ -305,12 +309,14 @@ let seedDatabase = () => {
                       if (err) { console.log(err) }
                       newBrearleys.forEach( brearlier => {
                         console.log(`created ${brearlier.firstName} ${brearlier.lastName}`)
+                      })
                     })
                   })
                 })
               })
             })
           })
+
         })
       })
     })

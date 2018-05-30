@@ -30,10 +30,11 @@ module.exports = {
       })
   },
   create: (req, res) => {
-    db.Person.create(req.body, (err, newPerson) => {
+    console.log(req.body.people)
+    db.Person.create(req.body.people, (err, newPeople) => {
       if (err) { console.log(err) }
-      console.log(`${newPerson} created`)
-      res.json(newPerson)
+      console.log(`${newPeople} created`)
+      res.json(newPeople)
     })
   },
   show: (req, res) => {
