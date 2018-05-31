@@ -3,17 +3,19 @@
   -webkit-font-smoothing: antialiased;
   font-family: "Raleway", sans-serif;
 }
+
+/************************************GENERAL COMMON STYLES*/
 body {
   background-color: #efefef;
   margin: 0 auto;
-
 }
 a {
   color: #1fa8a4;
   padding: 0.5em;
   text-decoration: none;
 }
-/*button settings*/
+
+/*button styles*/
 button {
   margin-top: 1.5em;
   font-size: 1em;
@@ -73,19 +75,19 @@ h1 a {
 }
 
 /*CONTENT BOX STYLES*/
-main {
-}
+
 .wrapper {
-  width: 40%;
+  width: 50%;
   margin: 0 auto;
-  margin-top: 9%;
+  margin-top: 10%;
   margin-bottom: 7%;
   display: flex;
   flex-direction: column;
+  padding-bottom: 11.5em;
 }
 .main-box {
   padding: 1em 0 1em 0;
-  background-color: white;
+  background-color: #fff;
   text-align: center;
   height: 50vh;
   margin: auto 0
@@ -96,7 +98,6 @@ footer {
   background-color: transparent;
   color: #1fa8a4;
   border-top: solid 0.1em;
-  padding-left: 1em;
   text-align: center;
 }
 footer p {
@@ -112,13 +113,10 @@ p a:hover {
 .icons {
   padding-left:0;
 }
-/******************************LANDING STYLES******************************/
+/******************************LANDING PAGE STYLES******************************/
 
 .main-box h2 {
-  margin: 1em 0 1em 0;
-}
-form {
-  margin-top: 3em;
+  margin: 2em 0 1em 0;
 }
 input {
   width: 50%;
@@ -133,19 +131,20 @@ input {
 input:focus {
   outline-width: 0;
 }
-/******************************SETUP STYLES******************************/
+/******************************SETUP PAGE STYLES******************************/
 
 /*CONTENT BOX STYLES*/
 #add-school {
   margin-left: 1em;
 }
-/******************************TABS STYLES******************************/
+/******************************TABS PAGE STYLES******************************/
+
 /*CONTENT BOX STYLES*/
 .tabs-wrapper {
   display: flex;
   flex-direction: column;
   margin: 0 1em;
-}foote
+}
 .tabs-rows {
   flex-direction: row;
   display: flex;
@@ -193,7 +192,6 @@ input:focus {
 .opp-col {
   width: 45%;
 }
-
 .opponents ul li {
   padding-bottom: 0.5%;
 }
@@ -206,8 +204,6 @@ input:focus {
   justify-content: space-between;
   width: 85%;
   margin: 0 auto;
-
-  /*padding-bottom: 5em;*/
 }
 .res-left-col {
   width: 60%;
@@ -220,7 +216,6 @@ input:focus {
 .opp-box {
   height: 7em;
   margin: 1.5em 0 2em 0;
-
 }
 .res-right-col {
   width: 35%;
@@ -228,9 +223,7 @@ input:focus {
   display: flex;
   justify-content: space-between;
 }
-.deblist-box{
-height:%;
-}
+
 .student-score-box {
   display: flex;
   flex-direction: row;
@@ -278,8 +271,8 @@ h4 {
   font-weight: 900;
 }
 #add-res-button{
- width:65%;
- margin-left: auto;
+  width:65%;
+  margin-left: auto;
 }
 
 /******************************AWARDS STYLES******************************/
@@ -289,15 +282,15 @@ h4 {
   width:100%;
 }
 .award-left-col{
-flex-direction: column;
-width: 50%;
-margin: 0 auto;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
 }
 .award-right-col{
-flex-direction: column;
-width: 50%;
-margin: 0 auto;
-margin-top: 0.5em;
+  flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 0.5em;
 }
 .award-left-col{
   margin: 0.5em 0;
@@ -337,10 +330,10 @@ margin-bottom:1em;
 .noDisplay {
   display: none;
 }
-
 .display {
   display: flex;
 }
+
 .school-tab {
   margin: 0 0.5em .25em 0;
   max-width: 20.5%;
@@ -348,4 +341,63 @@ margin-bottom:1em;
   border-top-left-radius: 50%;
   border-top-right-radius:50%;
   padding:0.8em 0.5em 0.5em 0.5em;
+}
+
+/******************************MEDIA QUERIES ******************************/
+
+/*Width media queries*/
+
+@media (max-width: 830px) {
+  .wrapper{
+  width:60%;
+}
+}
+@media (max-width: 700px) {
+  .wrapper{
+  width:70%;
+}
+}
+@media (max-width: 570px) {
+  .wrapper{
+  width:80%;
+}
+}
+@media (max-width: 510px) {
+  ::-webkit-input-placeholder {
+  font-size: .8em;
+}
+}
+@media (max-width: 465px) {
+  .wrapper{
+  width:88%;
+}
+}
+@media (max-width: 380px) {
+  ::-webkit-input-placeholder {
+  font-size: .7em;
+}
+h2{
+  font-size: 1.3em;
+}
+}
+
+/*height*/
+
+@media (max-height: 500px) {
+  .wrapper{
+  width:95%;
+}
+.main-box h2 {
+  margin: 1em 0 1em 0;
+}
+
+@media (max-height: 600px) {
+.main-box{
+  height: 55vh;
+}
+}
+@media (max-height: 550px) {
+.main-box{
+  height: 60vh;
+}
 }
