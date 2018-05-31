@@ -1,10 +1,14 @@
-$(document).ready(() => {
-console.log(`sanity check`)
 /////////////////////////////////////////////////////////
-                                /*save the metaData*/
+/*save data locally*/
 /////////////////////////////////////////////////////////
 let tournamentMetaData = {}
+let participatingSchools = []
+let participatingTeams = []
+let entryPageData = []
+let schoolTabId = undefined
 
+$(document).ready(() => {
+console.log(`sanity check`)
 /////////////////////////////////////////////////////////
                                 /*Save HTML for dynamically-generated pages*/
 /////////////////////////////////////////////////////////
@@ -15,7 +19,7 @@ let setupPage = `<h2>Set up school</h2>
                     </form>
                   </div>`
 
-let entryPage = `<div class="tabs-wrapper">
+let entryPage = `<div class="tabs-wrapper" id="entry-page">
                     <div class="tabs-rows" class="boxes" id="first-row">
                       <form id="studentForm" class="boxes participants">
                         <input type="text" class="student-name-field" id="studentName1" placeholder="Student" />
@@ -33,7 +37,7 @@ let entryPage = `<div class="tabs-wrapper">
                     </div>
                     <div class="tabs-rows">
                       <form id="judgeForm" class="boxes participants">
-                        <input type="text" class="judge-name-field" name="judgeName" placeholder="Judge" />
+                        <input type="text" class="judge-name-field" name="judgeName" id="judge" placeholder="Judge" />
                         <br></br>
                         <button class="inner-buttons">Save Judge</button>
                       </form>
@@ -51,10 +55,13 @@ let setupPageNav = `<button class="back-button" id="to-landing">Back</button>
 
 let landingPageNav = `<button class="continue-button" id="to-setup">Setup</button>`
 
+let entryPageNav = `<button class="back-button" id="back-to-setup">Back to Setup</button>`
+
 /////////////////////////////////////////////////////////
                                 /*other variables*/
 /////////////////////////////////////////////////////////
-const participatingSchools = []
+
+
 
 /////////////////////////////////////////////////////////
                                 /*functions for page generation*/
@@ -77,19 +84,35 @@ let saveTournamentMetaData = () => {
   tournamentMetaData.roundNumber = parseInt($('#roundNumber').val())
 }
 
-
+let saveEntryData = () => {
+  let entries = {
+    teams: $('.team').forEach( team => {
+      return team.val()
+    }),
+    judges: $('.judge').forEach( judge => {
+      return judge.val()
+    })
+  }
+  entryPageData.push(entries)
+}
 /////////////////////////////////////////////////////////
                                 /*AJAX success functions*/
 /////////////////////////////////////////////////////////
 
+//this function is called when school is created.
+
 let addSchool = (response) => {
-  participatingSchools.push({
-    school: response,
-    number: participatingSchools.length
+  participatingSchools.push(response)
+  schoolTabId = participatingSchools.length -1
+//school tab is created above setup page
+  let schoolTab = `<button class="school-tab" id="${schoolTabId}">${response.name}</button>`
+  $('#school-nav').append(schoolTab)
+//click handler added to new school button
+  $(`#${schoolTabId}`).on('click', () => {
+    generatePage(entryPage)
+    generateNav(entryPageNav)
   })
 
-  let schoolButton = `<button class="school-button" id="${response.name}">${response.name}</button>`
-  $('#school-tab').append(schoolButton)
 }
 
 /////////////////////////////////////////////////////////
@@ -110,8 +133,7 @@ $('#dynamic-box').on('click', "#to-setup", () => {
   console.log(tournamentMetaData)
 })
 
-//Landing Page Generator (accessed from setUp)
-
+//Landing Page Generator (accessed from setup)
 
 $('#dynamic-box').on('click', "#to-landing", () => {
   //in this version, landing page html must be locally-scoped for meta data to display properly
@@ -128,6 +150,13 @@ $('#dynamic-box').on('click', "#to-landing", () => {
   $('#school-tab').attr('class', 'noDisplay')
 })
 
+//Back to setup from Entry Page
+
+$('#dynamic-box').on('click', '#back-to-setup', () => {
+  saveEntryData()
+  generatePage(setupPage)
+  generateNav(setupPageNav)
+})
 //add school to database
 
 $('#dynamic-box').on('click', '#add-school', (e) => {
@@ -137,34 +166,7 @@ $('#dynamic-box').on('click', '#add-school', (e) => {
     method: 'POST',
     url: '/api/schools',
     data: $('#setup').serialize(),
-    success: (response) => {
-      console.log(response)
-      participatingSchools.push({
-        name: response.name,
-        number: participatingSchools.length
-      })
-      let schoolButton = `<button class="school-button" id="${response.name}">${response.name}</button>`
-      $('#school-tab').append(schoolButton)
-
-
-      $(`#${response._id}`).on('click', (e) => {
-        console.log(`hey im a button look at me`)
-        $('#toLandingPage').attr('id', 'to-setup')
-        $('.main-box').slideUp(500, () => {
-          $('.main-box').html(entryPage)
-        }).slideDown()
-
-        $('#to-setup').on('click', () => {
-          $('.main-box').slideUp(500, () => {
-            $('.main-box').html(setupPage)
-            $('#to-setup').attr('id', 'toLandingPage')
-          }).slideDown()
-        })
-
-      })
-
-
-    },
+    success: addSchool,
     error: (a, b, c) => {
       console.log(a)
       console.log(b)
@@ -183,22 +185,25 @@ $('#dynamic-box').on('click', '#saveTeam', (e) => {
     url: '/api/person',
     data: { people: [
       {
-        firstName: $('#studentName1').val(),
+        name: $('#studentName1').val(),
         isJudge: false,
         score: 0,
         isAvailable: true,
+        affiliation: participatingSchools[schoolTabId]
       },
       {
-        firstName: $('#studentName2').val(),
+        name: $('#studentName2').val(),
         isJudge: false,
         score: 0,
         isAvailable: true,
+        affiliation: participatingSchools[schoolTabId]
       },
       {
-        firstName: $('#studentName3').val(),
+        name: $('#studentName3').val(),
         isJudge: false,
         score: 0,
         isAvailable: true,
+        affiliation: participatingSchools[schoolTabId]
       }]
     },
     success: (response) => {
@@ -215,11 +220,12 @@ $('#dynamic-box').on('click', '#saveTeam', (e) => {
     method: 'POST',
     url: '/api/teams',
     data: {
-      name: `team ${$('#studentName1').val()[0]}${$('#studentName2').val()[0]}${$('#studentName3').val()[0]}`,
-      wins: 0
+      name: `${participatingSchools[schoolTabId].name} ${$('#studentName1').val()[0]}${$('#studentName2').val()[0]}${$('#studentName3').val()[0]}`,
+      wins: 0,
+      school: participatingSchools[schoolTabId]
     },
     success: (response) => {
-      $('#displayTeam').append(`<li>${response.name}</li>`)
+      $('#displayTeam').append(`<li class="team">${response.name}</li>`)
       console.log(response)
     },
     error: (a, b, c) => {
@@ -230,6 +236,21 @@ $('#dynamic-box').on('click', '#saveTeam', (e) => {
   })
 
 
+})
+//Create Judge
+$.ajax({
+  method: 'POST',
+  url: '/api/person',
+  data { person: {
+    name: $('#judge').val(),
+    isJudge: true,
+    isAvailable: true,
+    affiliation: participatingSchools[schoolTabId]
+    }
+  },
+  success: (response) => {
+    $('#displayJudge').append(`<li class="judge">${response.name}</li>`)
+  }
 })
 
 }) //close document.onReady
