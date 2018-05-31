@@ -39,7 +39,7 @@ let entryPage = `<div class="tabs-wrapper" id="entry-page">
                       <form id="judgeForm" class="boxes participants">
                         <input type="text" class="judge-name-field" name="judgeName" id="judge" placeholder="Judge" />
                         <br></br>
-                        <button class="inner-buttons" id="savejudge">Save Judge</button>
+                        <button class="inner-buttons" id="saveJudge">Save Judge</button>
                       </form>
                       <div class="boxes lists">
                         <h4>Judges</h4>
@@ -238,26 +238,29 @@ $('#dynamic-box').on('click', '#saveTeam', (e) => {
 
 })
 //Create Judge
-$('#dynamic-box').on('click', '#saveJudge', () => {
+$('#dynamic-box').on('click', '#saveJudge', (e) => {
+  e.preventDefault()
+
   $.ajax({
     method: 'POST',
     url: '/api/person',
-    data { person: {
+    data: { people: {
       name: $('#judge').val(),
       isJudge: true,
       isAvailable: true,
       affiliation: participatingSchools[schoolTabId]
-    }
-  },
-  success: (response) => {
-    $('#displayJudge').append(`<li class="judge">${response.name}</li>`)
+      }
+    },
+    success: (response) => {
+      console.log(`I made a judge`)
+      $('#displayJudge').append(`<li class="judge">${response.name}</li>`)
+    },
+    error: (a, b, c) => {
+      console.log(a)
+      console.log(b)
+      console.log(c)
     }
   })
-  error: (a, b, c) => {
-    console.log(a)
-    console.log(b)
-    console.log(c)
-  }
 })
 
 }) //close document.onReady
