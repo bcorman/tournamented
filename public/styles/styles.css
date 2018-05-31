@@ -316,15 +316,15 @@ h4 {
   width: 50%;
   margin: 0 auto;
 }
-.win-column{
+.win-column {
   width:70%;
   margin: 0 auto;
   height:85%;
 }
-.school-wins{
+.school-wins {
   padding-left: 0.5em;
 }
-.school-wins li{
+.school-wins li {
 margin-bottom:1em;
 }
 .noDisplay {
@@ -333,8 +333,8 @@ margin-bottom:1em;
 .display {
   display: flex;
 }
-.school-tab
-{
+
+.school-tab {
   margin: 0 0.5em .25em 0;
   max-width: 20.5%;
    overflow-wrap: break-word;
