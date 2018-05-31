@@ -50,6 +50,12 @@ let setupPageNav = `<button class="back-button" id="to-landing">Back</button>
                     <button class="continue-button" id="to-pairings">Pair Teams</button>`
 
 let landingPageNav = `<button class="continue-button" id="to-setup">Setup</button>`
+
+/////////////////////////////////////////////////////////
+                                /*other variables*/
+/////////////////////////////////////////////////////////
+const participatingSchools = []
+
 /////////////////////////////////////////////////////////
                                 /*functions for page generation*/
 /////////////////////////////////////////////////////////
@@ -69,6 +75,21 @@ let saveTournamentMetaData = () => {
   tournamentMetaData.date = $('#date').val()
   tournamentMetaData.location = $('#location').val()
   tournamentMetaData.roundNumber = parseInt($('#roundNumber').val())
+}
+
+
+/////////////////////////////////////////////////////////
+                                /*AJAX success functions*/
+/////////////////////////////////////////////////////////
+
+let addSchool = (response) => {
+  participatingSchools.push({
+    school: response,
+    number: participatingSchools.length
+  })
+
+  let schoolButton = `<button class="school-button" id="${response.name}">${response.name}</button>`
+  $('#school-tab').append(schoolButton)
 }
 
 /////////////////////////////////////////////////////////
@@ -108,6 +129,7 @@ $('#dynamic-box').on('click', "#to-landing", () => {
 })
 
 //add school to database
+
 $('#dynamic-box').on('click', '#add-school', (e) => {
   e.preventDefault()
 
@@ -119,9 +141,9 @@ $('#dynamic-box').on('click', '#add-school', (e) => {
       console.log(response)
       participatingSchools.push({
         name: response.name,
-        id: response._id
+        number: participatingSchools.length
       })
-      let schoolButton = `<button class="school-button" id="${response._id}">${response.name}</button>`
+      let schoolButton = `<button class="school-button" id="${response.name}">${response.name}</button>`
       $('#school-tab').append(schoolButton)
 
 
@@ -155,10 +177,6 @@ $('#dynamic-box').on('click', '#add-school', (e) => {
 
 $('#dynamic-box').on('click', '#saveTeam', (e) => {
   e.preventDefault()
-  //
-  // let person1 = { name: $('#person1').val() }
-  // let person2 = { name: $('#person2').val() }
-  // let person3 = { name: $('#person3').val() }
 
   $.ajax({
     method: 'POST',
