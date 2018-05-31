@@ -86,12 +86,8 @@ let saveTournamentMetaData = () => {
 
 let saveEntryData = () => {
   let entries = {
-    teams: $('.team').forEach( team => {
-      return team.val()
-    }),
-    judges: $('.judge').forEach( judge => {
-      return judge.val()
-    })
+    teams: $('.team'),
+    judges: $('.judge')
   }
   entryPageData.push(entries)
 }
