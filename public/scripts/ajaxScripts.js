@@ -50,6 +50,18 @@ let entryPage = `<div class="tabs-wrapper" id="entry-page">
                     </div>
                   </div>`
 
+let pairingsPage = `<h2>Pairings</h2>
+                    <div class="pairings boxes">
+                      <div>
+                        <ul id="proposition">
+                        </ul>
+                      </div>
+                      <div>
+                        <ul id="opposition">
+                        </ul>
+                      </div>
+                    </div>`
+
 let setupPageNav = `<button class="back-button" id="to-landing">Back</button>
                     <button class="continue-button" id="to-pairings">Pair Teams</button>`
 
@@ -57,6 +69,9 @@ let landingPageNav = `<button class="invisible-button" class="back-button">Back<
                       <button class="continue-button" id="to-setup">Setup</button>`
 
 let entryPageNav = `<button class="back-button" id="back-to-setup">Back to Setup</button>`
+
+let pairingsPageNav = `<button class ="back-button" id="back-to-setup">Back</button>
+                   <button class ="continue-button">Enter Results</button>`
 
 /////////////////////////////////////////////////////////
                                 /*other variables*/
@@ -68,37 +83,77 @@ let entryPageNav = `<button class="back-button" id="back-to-setup">Back to Setup
                                 /*functions for page generation*/
 /////////////////////////////////////////////////////////
 
-let generatePage = (newPage) => {
+const generatePage = (newPage) => {
   $('.main-box').slideUp(500, () => {
     $('.main-box').html(newPage)
   }).slideDown()
 }
 
-let generateNav = (newNav) => {
+const generateNav = (newNav) => {
   $('.nav-buttons').html(newNav)
 }
 
-let saveTournamentMetaData = () => {
+const saveTournamentMetaData = () => {
   tournamentMetaData.tournamentName = $('#tourName').val()
   tournamentMetaData.date = $('#date').val()
   tournamentMetaData.location = $('#location').val()
   tournamentMetaData.roundNumber = parseInt($('#roundNumber').val())
 }
 
-let saveEntryData = () => {
+const saveEntryData = () => {
   let entries = {
     teams: $('.team'),
     judges: $('.judge')
   }
   entryPageData.push(entries)
 }
+
+
+let addPropTeams = (allTeams) => {
+  let output = ''
+  for (let i = 0; i < allTeams.length; i++) {
+    if (i % 2 === 0) {
+      console.log(i)
+      output += `<li>Proposition: ${allTeams[i].name}</li>`
+    }
+  }
+  return output
+}
+
+let addOppTeams = (allTeams) => {
+  let output= ''
+  for (let i = 0; i < allTeams.length; i++) {
+    if (i % 2 !== 0) {
+      console.log(i)
+      output += `<li>Opposition: ${allTeams[i].name}</li>`
+    }
+
+  }
+  return output
+}
+
+// const pairTeams = (allTeams) => {
+//
+//
+//   for (let i = 0; i < allTeams.length; i++) {
+//     if (i % 2 === 0) {
+//       console.log(i)
+//
+//
+//       $('#proposition').append(`<li>Proposition: ${allTeams[i].name}</li>`)
+//     } else {
+//       console.log(i)
+//       $('#opposition').append(`<li>Opposition: ${allTeams[i].name}</li>`)
+//     }
+//   }
+// }
 /////////////////////////////////////////////////////////
                                 /*AJAX success functions*/
 /////////////////////////////////////////////////////////
 
 //this function is called when school is created.
 
-let addSchool = (response) => {
+const addSchool = (response) => {
   participatingSchools.push(response)
   schoolTabId = participatingSchools.length -1
 //school tab is created above setup page
@@ -111,6 +166,8 @@ let addSchool = (response) => {
   })
 
 }
+
+
 
 /////////////////////////////////////////////////////////
                       //click handlers / event listeners
@@ -154,6 +211,15 @@ $('#dynamic-box').on('click', '#back-to-setup', () => {
   generatePage(setupPage)
   generateNav(setupPageNav)
 })
+
+//Back to setup from Pairings
+
+$('#dynamic-box').on('click', '#back-to-setup', () => {
+  saveEntryData()
+  generatePage(setupPage)
+  generateNav(setupPageNav)
+})
+
 //add school to database
 
 $('#dynamic-box').on('click', '#add-school', (e) => {
@@ -165,9 +231,7 @@ $('#dynamic-box').on('click', '#add-school', (e) => {
     data: $('#setup').serialize(),
     success: addSchool,
     error: (a, b, c) => {
-      console.log(a)
-      console.log(b)
-      console.log(c)
+      console.log(a, b, c)
     }
   })
 })
@@ -207,9 +271,7 @@ $('#dynamic-box').on('click', '#saveTeam', (e) => {
       console.log(`look at me now im three people`)
     },
     error: (a, b, c) => {
-      console.log(a)
-      console.log(b)
-      console.log(c)
+      console.log(a, b, c)
     }
   })
 
@@ -226,9 +288,7 @@ $('#dynamic-box').on('click', '#saveTeam', (e) => {
       console.log(response)
     },
     error: (a, b, c) => {
-      console.log(a)
-      console.log(b)
-      console.log(c)
+      console.log(a, b, c)
     }
   })
 
@@ -253,11 +313,51 @@ $('#dynamic-box').on('click', '#saveJudge', (e) => {
       $('#displayJudge').append(`<li class="judge">${response.name}</li>`)
     },
     error: (a, b, c) => {
-      console.log(a)
-      console.log(b)
-      console.log(c)
+      console.log(a, b, c)
     }
   })
 })
+
+/////////////////////////////////////////////////////////
+                      //Pair Teams!!!!!
+/////////////////////////////////////////////////////////
+
+  $('#dynamic-box').on('click', '#to-pairings', (e) => {
+
+    e.preventDefault()
+    e.stopImmediatePropagation()
+
+    generateNav(pairingsPageNav)
+
+    $('.main-box').slideUp(500, () => {
+      $.ajax({
+        method: 'GET',
+        url: '/api/teams',
+        success: (response) => {
+            $('.main-box').html(
+              `<h2>Pairings</h2>
+              <div class="pairings boxes">
+                <div>
+                  <ul id="proposition">
+                  ${addPropTeams(response)}
+                  </ul>
+                </div>
+                <div>
+                  <ul id="opposition">
+                  ${addOppTeams(response)}
+                  </ul>
+                </div>
+              </div>`
+            )
+        },
+        error: (a, b, c) => {
+          console.log(a, b, c)
+        }
+      })
+    }).slideDown()
+  })
+
+
+
 
 }) //close document.onReady
