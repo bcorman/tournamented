@@ -18,173 +18,145 @@ let sampleSchools = [{
 }]
                                   /* British */
 const britishPeople = [{
-  firstName: 'Ray',
-  lastName: 'Davies',
+  name 'Ray Davies',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  firstName: 'George',
-  lastName: 'Orwell',
+  name 'George Orwell',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  firstName: 'Rod',
-  lastName: 'Stewart',
+  name 'Rod Stewart',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  firstName: 'Ronnie',
-  lastName: 'Lane',
+  name 'Ronnie Lane',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  firstName: 'George',
-  lastName: 'Smiley',
+  name 'George Smiley',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  firstName: 'Jim',
-  lastName: 'Prideaux',
+  name 'Jim Prideaux',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  firstName: 'Vaclav',
-  lastName: 'Paris',
+  name 'Vaclav Paris',
   isJudge: true,
   isAvailable: true
 }]
                             /* Foon */
 const foonPeople = [{
-  firstName: 'Usidore',
-  lastName: 'The Blue',
+  name 'Usidore The Blue',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  firstName: 'Fi\'ang',
-  lastName: 'Yalok',
+  name 'Fi\'ang Yalok',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  firstName: 'Zoenen',
-  lastName: 'Hoogstandjes',
+  name 'Zoenen Hoogstandjes',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  firstName: 'Gasmueneas',
-  lastName: 'Maestar',
+  name 'Gasmueneas Maestar',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  firstName: 'Stinson',
-  lastName: 'Chapeau',
+  name 'Stinson Chapeau',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  firstName: 'Toby',
-  lastName: 'LeRone',
+  name 'Toby LeRone',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  firstName: 'Sleepy',
-  lastName: 'LeBoeuf',
+  name 'Sleepy LeBoeuf',
   isJudge: true,
   isAvailable: true
 }]
                                   /* Nest */
 const nestPeople = [{
-  firstName: 'Pierre',
-  lastName: 'Robin',
+  name 'Pierre Robin',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  firstName: 'Doderick',
-  lastName: 'Soup',
+  name 'Doderick Soup',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  firstName: 'Raggedy',
-  lastName: 'Anne',
+  name 'Raggedy Anne',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  firstName: 'Encyclopedia',
-  lastName: 'Brown',
+  name 'Encyclopedia Brown',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  firstName: 'Murphy',
-  lastName: 'Brown',
+  name 'Murphy Brown',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  firstName: 'Jian',
-  lastName: 'Leon',
+  name 'Jian Leon',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  firstName: 'Franz',
-  lastName: 'DerVerf',
+  name 'Franz DerVerf',
   isJudge: true,
   isAvailable: true
 }]
                               /* Brearley */
 const brearleyPeople = [{
-firstName: 'Greg',
-lastName: 'Stritch',
+name 'Greg Stritch',
 isJudge: false,
 isAvailable: true,
 score: 0
 }, {
-firstName: 'Frank',
-lastName: 'Kuntz',
+name 'Frank Kuntz',
 isJudge: false,
 isAvailable: true,
 score: 0
 }, {
-firstName: 'Yossarian',
-lastName: 'The Assyrian',
+name 'Yossarian The Assyrian',
 isJudge: false,
 isAvailable: true,
 score: 0
 }, {
-firstName: 'Orr',
-lastName: 'Swede',
+name 'Orr Swede',
 isJudge: false,
 isAvailable: true,
 score: 0
 }, {
-firstName: 'Nately',
-lastName: 'Garfunkel',
+name 'Nately Garfunkel',
 isJudge: false,
 isAvailable: true,
 score: 0
 }, {
-firstName: 'Alan',
-lastName: 'Arkansas',
+name 'Alan Arkansas',
 isJudge: false,
 isAvailable: true,
 score: 0
 }, {
-firstName: 'Clifford',
-lastName: 'York',
+name 'Clifford York',
 isJudge: true,
 isAvailable: true
 }]
@@ -245,7 +217,7 @@ let assignTeams = (teamName1, teamName2, school, personArray) => {
 let assignSchool = (personArray, school) => {
   personArray.forEach( person => {
     person.affiliation = school
-    console.log(`${person.firstName} ${person.lastName} assigned to ${school.name}`)
+    console.log(`${person.name} assigned to ${school.name}`)
   })
 }
 
