@@ -53,11 +53,11 @@ let entryPage = `<div class="tabs-wrapper" id="entry-page">
 let pairingsPage = `<h2>Pairings</h2>
                     <div class="pairings boxes">
                       <div>
-                        <ul id="prop">
+                        <ul id="proposition">
                         </ul>
                       </div>
                       <div>
-                        <ul id="opp">
+                        <ul id="opposition">
                         </ul>
                       </div>
                     </div>`
@@ -70,7 +70,7 @@ let landingPageNav = `<button class="invisible-button" class="back-button">Back<
 
 let entryPageNav = `<button class="back-button" id="back-to-setup">Back to Setup</button>`
 
-let pairingsPageNav = `<button class ="back-button"><a href="tabs.html">Back</a></button>
+let pairingsPageNav = `<button class ="back-button" id="back-to-setup">Back</button>
                    <button class ="continue-button">Enter Results</button>`
 
 /////////////////////////////////////////////////////////
@@ -109,35 +109,44 @@ const saveEntryData = () => {
 }
 
 
-const pairTeams = (allTeams, allSchools) => {
-//schoolTeams = array containing an array of each school's teams
-  let schoolTeams = []
-  let prop = []
-  let opp = []
-//Sort schoolteams
-  allSchools.forEach( uniqueSchool => {
-    schoolTeams.push(allTeams.filter( team => team.school === uniqueSchool ))
-  })
-//For each group of teams, sort into prop and opp based on index position
-  schoolTeams.forEach( groupOfTeams => {
-    for (let i = 0; i < groupOfTeams.length; i++) {
-      if (i % 2 === 0) {
-        prop.push[groupOfTeams[i]]
-      } else {
-        opp.push[groupOfTeams[i]]
-      }
+let addPropTeams = (allTeams) => {
+  let output = ''
+  for (let i = 0; i < allTeams.length; i++) {
+    if (i % 2 === 0) {
+      console.log(i)
+      output += `<li>Proposition: ${allTeams[i].name}</li>`
     }
-  })
-//For each prop and opp, add to unordered list
-
- for (let i = 0; i < prop.length; i++) {
-   $('#prop').append(`<li>Proposition: ${prop[i]}</li>`)
- }
-
- for (let i = 0; i < opp.length; i++) {
-   $('#opp').append(`<li>Opposition: ${opp[i]}</li>`)
- }
+  }
+  return output
 }
+
+let addOppTeams = (allTeams) => {
+  let output= ''
+  for (let i = 0; i < allTeams.length; i++) {
+    if (i % 2 !== 0) {
+      console.log(i)
+      output += `<li>Opposition: ${allTeams[i].name}</li>`
+    }
+
+  }
+  return output
+}
+
+// const pairTeams = (allTeams) => {
+//
+//
+//   for (let i = 0; i < allTeams.length; i++) {
+//     if (i % 2 === 0) {
+//       console.log(i)
+//
+//
+//       $('#proposition').append(`<li>Proposition: ${allTeams[i].name}</li>`)
+//     } else {
+//       console.log(i)
+//       $('#opposition').append(`<li>Opposition: ${allTeams[i].name}</li>`)
+//     }
+//   }
+// }
 /////////////////////////////////////////////////////////
                                 /*AJAX success functions*/
 /////////////////////////////////////////////////////////
@@ -202,6 +211,15 @@ $('#dynamic-box').on('click', '#back-to-setup', () => {
   generatePage(setupPage)
   generateNav(setupPageNav)
 })
+
+//Back to setup from Pairings
+
+$('#dynamic-box').on('click', '#back-to-setup', () => {
+  saveEntryData()
+  generatePage(setupPage)
+  generateNav(setupPageNav)
+})
+
 //add school to database
 
 $('#dynamic-box').on('click', '#add-school', (e) => {
@@ -305,36 +323,38 @@ $('#dynamic-box').on('click', '#saveJudge', (e) => {
 /////////////////////////////////////////////////////////
 
   $('#dynamic-box').on('click', '#to-pairings', (e) => {
+
     e.preventDefault()
-    //Get all teams, save to variable
-    //teams = all team objects
-    let teams
-    //schools = array of school ids
-    let schools = []
+    e.stopImmediatePropagation()
 
-
-    $.ajax({
-      method: 'GET',
-      url: '/api/teams',
-      success: (response) => {
-        teams = response
-        response.forEach( team => {
-          schools.push(team.school)
-        })
-
-      },
-      error: (a, b, c) => {
-        console.log(a, b, c)
-      }
-    })
-
-    //Generate Page
-    generatePage(pairingsPage)
     generateNav(pairingsPageNav)
 
-    //Pair teams
-    pairTeams(teams, schools)
-
+    $('.main-box').slideUp(500, () => {
+      $.ajax({
+        method: 'GET',
+        url: '/api/teams',
+        success: (response) => {
+            $('.main-box').html(
+              `<h2>Pairings</h2>
+              <div class="pairings boxes">
+                <div>
+                  <ul id="proposition">
+                  ${addPropTeams(response)}
+                  </ul>
+                </div>
+                <div>
+                  <ul id="opposition">
+                  ${addOppTeams(response)}
+                  </ul>
+                </div>
+              </div>`
+            )
+        },
+        error: (a, b, c) => {
+          console.log(a, b, c)
+        }
+      })
+    }).slideDown()
   })
 
 
