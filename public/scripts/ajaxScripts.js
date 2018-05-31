@@ -112,7 +112,7 @@ const saveEntryData = () => {
 let addPropTeams = (allTeams) => {
   let output = ''
   for (let i = 0; i < allTeams.length; i++) {
-    if (i % 2 === 0) {
+    if (i % 2 === 0 && i < 8) {
       console.log(i)
       output += `<li>Proposition: ${allTeams[i].name}</li>`
     }
@@ -123,7 +123,7 @@ let addPropTeams = (allTeams) => {
 let addOppTeams = (allTeams) => {
   let output= ''
   for (let i = 0; i < allTeams.length; i++) {
-    if (i % 2 !== 0) {
+    if (i % 2 !== 0 && i < 8) {
       console.log(i)
       output += `<li>Opposition: ${allTeams[i].name}</li>`
     }
@@ -132,20 +132,7 @@ let addOppTeams = (allTeams) => {
   return output
 }
 
-// const pairTeams = (allTeams) => {
-//
-//
-//   for (let i = 0; i < allTeams.length; i++) {
-//     if (i % 2 === 0) {
-//       console.log(i)
-//
-//
-//       $('#proposition').append(`<li>Proposition: ${allTeams[i].name}</li>`)
-//     } else {
-//       console.log(i)
-//       $('#opposition').append(`<li>Opposition: ${allTeams[i].name}</li>`)
-//     }
-//   }
+
 // }
 /////////////////////////////////////////////////////////
                                 /*AJAX success functions*/
