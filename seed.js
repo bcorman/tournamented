@@ -18,145 +18,145 @@ let sampleSchools = [{
 }]
                                   /* British */
 const britishPeople = [{
-  name 'Ray Davies',
+  name: 'Ray Davies',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  name 'George Orwell',
+  name: 'George Orwell',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  name 'Rod Stewart',
+  name: 'Rod Stewart',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  name 'Ronnie Lane',
+  name: 'Ronnie Lane',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  name 'George Smiley',
+  name: 'George Smiley',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  name 'Jim Prideaux',
+  name: 'Jim Prideaux',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  name 'Vaclav Paris',
+  name: 'Vaclav Paris',
   isJudge: true,
   isAvailable: true
 }]
                             /* Foon */
 const foonPeople = [{
-  name 'Usidore The Blue',
+  name: 'Usidore The Blue',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  name 'Fi\'ang Yalok',
+  name: 'Fi\'ang Yalok',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  name 'Zoenen Hoogstandjes',
+  name: 'Zoenen Hoogstandjes',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  name 'Gasmueneas Maestar',
+  name: 'Gasmueneas Maestar',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  name 'Stinson Chapeau',
+  name: 'Stinson Chapeau',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  name 'Toby LeRone',
+  name: 'Toby LeRone',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  name 'Sleepy LeBoeuf',
+  name: 'Sleepy LeBoeuf',
   isJudge: true,
   isAvailable: true
 }]
                                   /* Nest */
 const nestPeople = [{
-  name 'Pierre Robin',
+  name: 'Pierre Robin',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  name 'Doderick Soup',
+  name: 'Doderick Soup',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  name 'Raggedy Anne',
+  name: 'Raggedy Anne',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  name 'Encyclopedia Brown',
+  name: 'Encyclopedia Brown',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  name 'Murphy Brown',
+  name: 'Murphy Brown',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  name 'Jian Leon',
+  name: 'Jian Leon',
   isJudge: false,
   isAvailable: true,
   score: 0
 }, {
-  name 'Franz DerVerf',
+  name: 'Franz DerVerf',
   isJudge: true,
   isAvailable: true
 }]
                               /* Brearley */
 const brearleyPeople = [{
-name 'Greg Stritch',
+name: 'Greg Stritch',
 isJudge: false,
 isAvailable: true,
 score: 0
 }, {
-name 'Frank Kuntz',
+name: 'Frank Kuntz',
 isJudge: false,
 isAvailable: true,
 score: 0
 }, {
-name 'Yossarian The Assyrian',
+name: 'Yossarian The Assyrian',
 isJudge: false,
 isAvailable: true,
 score: 0
 }, {
-name 'Orr Swede',
+name: 'Orr Swede',
 isJudge: false,
 isAvailable: true,
 score: 0
 }, {
-name 'Nately Garfunkel',
+name: 'Nately Garfunkel',
 isJudge: false,
 isAvailable: true,
 score: 0
 }, {
-name 'Alan Arkansas',
+name: 'Alan Arkansas',
 isJudge: false,
 isAvailable: true,
 score: 0
 }, {
-name 'Clifford York',
+name: 'Clifford York',
 isJudge: true,
 isAvailable: true
 }]
@@ -265,22 +265,22 @@ let seedDatabase = () => {
               db.Person.create(britishPeople, (err, newBrits) => {
                 if (err) { console.log(err) }
                 newBrits.forEach( brit => {
-                  console.log(`created ${brit.firstName} ${brit.lastName}`)
+                  console.log(`created ${brit.name}`)
                 })
                 db.Person.create(foonPeople, (err, newFoons) => {
                   if (err) { console.log(err) }
                   newFoons.forEach( foony => {
-                    console.log(`created ${foony.firstName} ${foony.lastName}`)
+                    console.log(`created ${foony.name}`)
                   })
                   db.Person.create(nestPeople, (err, newNest) => {
                     if (err) { console.log(err) }
                     newNest.forEach( nester => {
-                      console.log(`created ${nester.firstName} ${nester.lastName}`)
+                      console.log(`created ${nester.name}`)
                     })
                     db.Person.create(brearleyPeople, (err, newBrearleys) => {
                       if (err) { console.log(err) }
                       newBrearleys.forEach( brearlier => {
-                        console.log(`created ${brearlier.firstName} ${brearlier.lastName}`)
+                        console.log(`created ${brearlier.name}`)
                       })
                     })
                   })

@@ -46,7 +46,7 @@ let entryPage = `<div class="tabs-wrapper">
                     </div>
                   </div>`
 
-let setupPageNav = `<button class="back-button" id="tolandingPage">Back</button>
+let setupPageNav = `<button class="back-button" id="to-landing">Back</button>
                     <button class="continue-button" id="to-pairings">Pair Teams</button>`
 
 let landingPageNav = `<button class="continue-button" id="to-setup">Setup</button>`
@@ -91,24 +91,20 @@ $('#dynamic-box').on('click', "#to-setup", () => {
 
 //Landing Page Generator (accessed from setUp)
 
-//Takes user from setup back to landing, displays saved values
 
-$('#dynamic-box').on('click', "#toLandingPage", () => {
+$('#dynamic-box').on('click', "#to-landing", () => {
   //in this version, landing page html must be locally-scoped for meta data to display properly
   let landingPage = `<h2>Welcome</h2>
                        <form>
                          <input id="tourName" type="text" name="name" placeholder="Tournament Name" value="${tournamentMetaData.tournamentName}" />
-                         <input id="date" type="text" placeholder="Tournament Name" value="${tournamentMetaData.date}">
-                         <input id="location" type="text" name="name" placeholder="Tournament Name" value="${tournamentMetaData.location}" />
-                         <input id="roundNumber" type="number" min="1" max="10" name="roundNumber" onfocus="(this.type='number')" onblur="(this.type='text')" value="${tournamentMetaData.roundNumber}" size="3" />
+                         <input id="date" type="text" placeholder="Date" value="${tournamentMetaData.date}">
+                         <input id="location" type="text" name="name" placeholder="Location" value="${tournamentMetaData.location}" />
+                         <input id="roundNumber" type="number" placeholder="Number of Rounds" value="${tournamentMetaData.roundNumber}" size="3" />
                        </form>`
+
   generatePage(landingPage)
   generateNav(landingPageNav)
-  $('.main-box').slideUp(500, () => {
-    $('.main-box').html(landingPage)
-    $('.nav-buttons').html(mainPageNav)
-    $('#school-tab').attr('class', 'noDisplay')
-  }).slideDown()
+  $('#school-tab').attr('class', 'noDisplay')
 })
 
 //add school to database
