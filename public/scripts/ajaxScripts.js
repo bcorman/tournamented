@@ -53,7 +53,8 @@ let entryPage = `<div class="tabs-wrapper" id="entry-page">
 let setupPageNav = `<button class="back-button" id="to-landing">Back</button>
                     <button class="continue-button" id="to-pairings">Pair Teams</button>`
 
-let landingPageNav = `<button class="continue-button" id="to-setup">Setup</button>`
+let landingPageNav = `<button class="invisible-button" class="back-button">Back</button>
+                      <button class="continue-button" id="to-setup">Setup</button>`
 
 let entryPageNav = `<button class="back-button" id="back-to-setup">Back to Setup</button>`
 
@@ -124,7 +125,7 @@ $('#dynamic-box').on('click', "#to-setup", () => {
 //change nav button
   generateNav(setupPageNav)
 //Display School Tab
-  $('#school-tab').attr('class', 'display')
+  $('#school-nav').attr('class', 'display')
 
   console.log(tournamentMetaData)
 })
@@ -143,7 +144,7 @@ $('#dynamic-box').on('click', "#to-landing", () => {
 
   generatePage(landingPage)
   generateNav(landingPageNav)
-  $('#school-tab').attr('class', 'noDisplay')
+  $('#school-nav').attr('class', 'noDisplay')
 })
 
 //Back to setup from Entry Page
