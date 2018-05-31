@@ -50,6 +50,18 @@ let entryPage = `<div class="tabs-wrapper" id="entry-page">
                     </div>
                   </div>`
 
+let pairingsPage = `<h2>Pairings</h2>
+                    <div class="pairings boxes">
+                      <div>
+                        <ul id="prop">
+                        </ul>
+                      </div>
+                      <div>
+                        <ul id="opp">
+                        </ul>
+                      </div>
+                    </div>`
+
 let setupPageNav = `<button class="back-button" id="to-landing">Back</button>
                     <button class="continue-button" id="to-pairings">Pair Teams</button>`
 
@@ -57,6 +69,9 @@ let landingPageNav = `<button class="invisible-button" class="back-button">Back<
                       <button class="continue-button" id="to-setup">Setup</button>`
 
 let entryPageNav = `<button class="back-button" id="back-to-setup">Back to Setup</button>`
+
+let pairingsPageNav = `<button class ="back-button"><a href="tabs.html">Back</a></button>
+                   <button class ="continue-button">Enter Results</button>`
 
 /////////////////////////////////////////////////////////
                                 /*other variables*/
@@ -68,29 +83,60 @@ let entryPageNav = `<button class="back-button" id="back-to-setup">Back to Setup
                                 /*functions for page generation*/
 /////////////////////////////////////////////////////////
 
-let generatePage = (newPage) => {
+const generatePage = (newPage) => {
   $('.main-box').slideUp(500, () => {
     $('.main-box').html(newPage)
   }).slideDown()
 }
 
-let generateNav = (newNav) => {
+const generateNav = (newNav) => {
   $('.nav-buttons').html(newNav)
 }
 
-let saveTournamentMetaData = () => {
+const saveTournamentMetaData = () => {
   tournamentMetaData.tournamentName = $('#tourName').val()
   tournamentMetaData.date = $('#date').val()
   tournamentMetaData.location = $('#location').val()
   tournamentMetaData.roundNumber = parseInt($('#roundNumber').val())
 }
 
-let saveEntryData = () => {
+const saveEntryData = () => {
   let entries = {
     teams: $('.team'),
     judges: $('.judge')
   }
   entryPageData.push(entries)
+}
+
+
+const pairTeams = (allTeams, allSchools) => {
+//schoolTeams = array containing an array of each school's teams
+  let schoolTeams = []
+  let prop = []
+  let opp = []
+//Sort schoolteams
+  allSchools.forEach( uniqueSchool => {
+    schoolTeams.push(allTeams.filter( team => team.school === uniqueSchool ))
+  })
+//For each group of teams, sort into prop and opp based on index position
+  schoolTeams.forEach( groupOfTeams => {
+    for (let i = 0; i < groupOfTeams.length; i++) {
+      if (i % 2 === 0) {
+        prop.push[groupOfTeams[i]]
+      } else {
+        opp.push[groupOfTeams[i]]
+      }
+    }
+  })
+//For each prop and opp, add to unordered list
+
+ for (let i = 0; i < prop.length; i++) {
+   $('#prop').append(`<li>Proposition: ${prop[i]}</li>`)
+ }
+
+ for (let i = 0; i < opp.length; i++) {
+   $('#opp').append(`<li>Opposition: ${opp[i]}</li>`)
+ }
 }
 /////////////////////////////////////////////////////////
                                 /*AJAX success functions*/
@@ -98,7 +144,7 @@ let saveEntryData = () => {
 
 //this function is called when school is created.
 
-let addSchool = (response) => {
+const addSchool = (response) => {
   participatingSchools.push(response)
   schoolTabId = participatingSchools.length -1
 //school tab is created above setup page
@@ -111,6 +157,8 @@ let addSchool = (response) => {
   })
 
 }
+
+
 
 /////////////////////////////////////////////////////////
                       //click handlers / event listeners
@@ -165,9 +213,7 @@ $('#dynamic-box').on('click', '#add-school', (e) => {
     data: $('#setup').serialize(),
     success: addSchool,
     error: (a, b, c) => {
-      console.log(a)
-      console.log(b)
-      console.log(c)
+      console.log(a, b, c)
     }
   })
 })
@@ -207,9 +253,7 @@ $('#dynamic-box').on('click', '#saveTeam', (e) => {
       console.log(`look at me now im three people`)
     },
     error: (a, b, c) => {
-      console.log(a)
-      console.log(b)
-      console.log(c)
+      console.log(a, b, c)
     }
   })
 
@@ -226,9 +270,7 @@ $('#dynamic-box').on('click', '#saveTeam', (e) => {
       console.log(response)
     },
     error: (a, b, c) => {
-      console.log(a)
-      console.log(b)
-      console.log(c)
+      console.log(a, b, c)
     }
   })
 
@@ -253,11 +295,49 @@ $('#dynamic-box').on('click', '#saveJudge', (e) => {
       $('#displayJudge').append(`<li class="judge">${response.name}</li>`)
     },
     error: (a, b, c) => {
-      console.log(a)
-      console.log(b)
-      console.log(c)
+      console.log(a, b, c)
     }
   })
 })
+
+/////////////////////////////////////////////////////////
+                      //Pair Teams!!!!!
+/////////////////////////////////////////////////////////
+
+  $('#dynamic-box').on('click', '#to-pairings', (e) => {
+    e.preventDefault()
+    //Get all teams, save to variable
+    //teams = all team objects
+    let teams
+    //schools = array of school ids
+    let schools = []
+
+
+    $.ajax({
+      method: 'GET',
+      url: '/api/teams',
+      success: (response) => {
+        teams = response
+        response.forEach( team => {
+          schools.push(team.school)
+        })
+
+      },
+      error: (a, b, c) => {
+        console.log(a, b, c)
+      }
+    })
+
+    //Generate Page
+    generatePage(pairingsPage)
+    generateNav(pairingsPageNav)
+
+    //Pair teams
+    pairTeams(teams, schools)
+
+  })
+
+
+
 
 }) //close document.onReady
