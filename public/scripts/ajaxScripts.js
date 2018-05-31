@@ -1,9 +1,13 @@
 $(document).ready(() => {
 console.log(`sanity check`)
-
-//save the metaData
-let participatingSchools = []
+/////////////////////////////////////////////////////////
+                                /*save the metaData*/
+/////////////////////////////////////////////////////////
 let tournamentMetaData = {}
+
+/////////////////////////////////////////////////////////
+                                /*Save HTML for dynamically-generated pages*/
+/////////////////////////////////////////////////////////
 let setupPage = `<h2>Set up school</h2>
                     <form id="setup">
                       <input type="text" name="name" placeholder="School Name" />
@@ -43,43 +47,63 @@ let entryPage = `<div class="tabs-wrapper">
                   </div>`
 
 let setupPageNav = `<button class="back-button" id="tolandingPage">Back</button>
-                    <button class="continue-button">Continue</button>`
+                    <button class="continue-button" id="to-pairings">Pair Teams</button>`
 
-let mainPageNav = `<button class="continue-button" id="continue-landing">Continue</button>`
-//Takes user to setup page
+let landingPageNav = `<button class="continue-button" id="to-setup">Setup</button>`
+/////////////////////////////////////////////////////////
+                                /*functions for page generation*/
+/////////////////////////////////////////////////////////
 
-$('#dynamic-box').on('click', "#continue-landing", (e) => {
-  e.preventDefault()
-  //save the metaData
+let generatePage = (newPage) => {
+  $('.main-box').slideUp(500, () => {
+    $('.main-box').html(newPage)
+  }).slideDown()
+}
+
+let generateNav = (newNav) => {
+  $('.nav-buttons').html(newNav)
+}
+
+let saveTournamentMetaData = () => {
   tournamentMetaData.tournamentName = $('#tourName').val()
   tournamentMetaData.date = $('#date').val()
   tournamentMetaData.location = $('#location').val()
   tournamentMetaData.roundNumber = parseInt($('#roundNumber').val())
+}
 
-  //change the html to setupPage
-  $('.main-box').slideUp(500, () => {
-    $('.main-box').html(setupPage)
-    $('.nav-buttons').html(setupPageNav)
-    $('#school-tab').attr('class', 'display')
-  }).slideDown()
-  
+/////////////////////////////////////////////////////////
+                      //click handlers / event listeners
+/////////////////////////////////////////////////////////
+//Setup Page generator
 
+$('#dynamic-box').on('click', "#to-setup", () => {
+//save the metaData
+  saveTournamentMetaData()
+//change the html to setupPage
+  generatePage(setupPage)
+//change nav button
+  generateNav(setupPageNav)
+//Display School Tab
+  $('#school-tab').attr('class', 'display')
 
   console.log(tournamentMetaData)
 })
 
+//Landing Page Generator (accessed from setUp)
+
 //Takes user from setup back to landing, displays saved values
 
-$('#dynamic-box').on('click', "#toLandingPage", (e) => {
-  //landing page html must be locally-scoped for meta data to work properly
+$('#dynamic-box').on('click', "#toLandingPage", () => {
+  //in this version, landing page html must be locally-scoped for meta data to display properly
   let landingPage = `<h2>Welcome</h2>
                        <form>
                          <input id="tourName" type="text" name="name" placeholder="Tournament Name" value="${tournamentMetaData.tournamentName}" />
-                         <input id="date" type="text" value="${tournamentMetaData.date}">
-                         <input id="location" type="text" name="name" value="${tournamentMetaData.location}" />
+                         <input id="date" type="text" placeholder="Tournament Name" value="${tournamentMetaData.date}">
+                         <input id="location" type="text" name="name" placeholder="Tournament Name" value="${tournamentMetaData.location}" />
                          <input id="roundNumber" type="number" min="1" max="10" name="roundNumber" onfocus="(this.type='number')" onblur="(this.type='text')" value="${tournamentMetaData.roundNumber}" size="3" />
                        </form>`
-  e.preventDefault()
+  generatePage(landingPage)
+  generateNav(landingPageNav)
   $('.main-box').slideUp(500, () => {
     $('.main-box').html(landingPage)
     $('.nav-buttons').html(mainPageNav)
