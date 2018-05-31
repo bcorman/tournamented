@@ -46,10 +46,16 @@ let entryPage = `<div class="tabs-wrapper">
                     </div>
                   </div>`
 
-let setupPageNav = `<button class="back-button" id="tolandingPage">Back</button>
+let setupPageNav = `<button class="back-button" id="to-landing">Back</button>
                     <button class="continue-button" id="to-pairings">Pair Teams</button>`
 
 let landingPageNav = `<button class="continue-button" id="to-setup">Setup</button>`
+
+/////////////////////////////////////////////////////////
+                                /*other variables*/
+/////////////////////////////////////////////////////////
+const participatingSchools = []
+
 /////////////////////////////////////////////////////////
                                 /*functions for page generation*/
 /////////////////////////////////////////////////////////
@@ -69,6 +75,21 @@ let saveTournamentMetaData = () => {
   tournamentMetaData.date = $('#date').val()
   tournamentMetaData.location = $('#location').val()
   tournamentMetaData.roundNumber = parseInt($('#roundNumber').val())
+}
+
+
+/////////////////////////////////////////////////////////
+                                /*AJAX success functions*/
+/////////////////////////////////////////////////////////
+
+let addSchool = (response) => {
+  participatingSchools.push({
+    school: response,
+    number: participatingSchools.length
+  })
+
+  let schoolButton = `<button class="school-button" id="${response.name}">${response.name}</button>`
+  $('#school-tab').append(schoolButton)
 }
 
 /////////////////////////////////////////////////////////
@@ -91,27 +112,24 @@ $('#dynamic-box').on('click', "#to-setup", () => {
 
 //Landing Page Generator (accessed from setUp)
 
-//Takes user from setup back to landing, displays saved values
 
-$('#dynamic-box').on('click', "#toLandingPage", () => {
+$('#dynamic-box').on('click', "#to-landing", () => {
   //in this version, landing page html must be locally-scoped for meta data to display properly
   let landingPage = `<h2>Welcome</h2>
                        <form>
                          <input id="tourName" type="text" name="name" placeholder="Tournament Name" value="${tournamentMetaData.tournamentName}" />
-                         <input id="date" type="text" placeholder="Tournament Name" value="${tournamentMetaData.date}">
-                         <input id="location" type="text" name="name" placeholder="Tournament Name" value="${tournamentMetaData.location}" />
-                         <input id="roundNumber" type="number" min="1" max="10" name="roundNumber" onfocus="(this.type='number')" onblur="(this.type='text')" value="${tournamentMetaData.roundNumber}" size="3" />
+                         <input id="date" type="text" placeholder="Date" value="${tournamentMetaData.date}">
+                         <input id="location" type="text" name="name" placeholder="Location" value="${tournamentMetaData.location}" />
+                         <input id="roundNumber" type="number" placeholder="Number of Rounds" value="${tournamentMetaData.roundNumber}" size="3" />
                        </form>`
+
   generatePage(landingPage)
   generateNav(landingPageNav)
-  $('.main-box').slideUp(500, () => {
-    $('.main-box').html(landingPage)
-    $('.nav-buttons').html(mainPageNav)
-    $('#school-tab').attr('class', 'noDisplay')
-  }).slideDown()
+  $('#school-tab').attr('class', 'noDisplay')
 })
 
 //add school to database
+
 $('#dynamic-box').on('click', '#add-school', (e) => {
   e.preventDefault()
 
@@ -123,9 +141,9 @@ $('#dynamic-box').on('click', '#add-school', (e) => {
       console.log(response)
       participatingSchools.push({
         name: response.name,
-        id: response._id
+        number: participatingSchools.length
       })
-      let schoolButton = `<button class="school-button" id="${response._id}">${response.name}</button>`
+      let schoolButton = `<button class="school-button" id="${response.name}">${response.name}</button>`
       $('#school-tab').append(schoolButton)
 
 
@@ -159,10 +177,6 @@ $('#dynamic-box').on('click', '#add-school', (e) => {
 
 $('#dynamic-box').on('click', '#saveTeam', (e) => {
   e.preventDefault()
-  //
-  // let person1 = { name: $('#person1').val() }
-  // let person2 = { name: $('#person2').val() }
-  // let person3 = { name: $('#person3').val() }
 
   $.ajax({
     method: 'POST',
