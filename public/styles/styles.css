@@ -3,12 +3,10 @@
   -webkit-font-smoothing: antialiased;
   font-family: "Raleway", sans-serif;
 }
-html {
-  max-height: 100vh;
-}
 body {
   background-color: #efefef;
-  margin: 0em;
+  margin: 0 auto;
+
 }
 a {
   color: #1fa8a4;
@@ -40,11 +38,14 @@ button a:hover {
   flex-direction: row;
   justify-content: space-between;
 }
-.continue-button {
-  align-self: flex-end;
+.invisible-button{
+  background-color: #efefef;
+  border:none;
+  color:#efefef;
 }
-.back-button {
-  align-self: flex-start;
+.invisible-button:hover{
+  background-color: #efefef;
+  color: #efefef;
 }
 
 ul {
@@ -108,7 +109,10 @@ p a {
 p a:hover {
   font-weight: 800;
 }
-/******************************INDEX STYLES******************************/
+.icons {
+  padding-left:0;
+}
+/******************************LANDING STYLES******************************/
 
 .main-box h2 {
   margin: 1em 0 1em 0;
@@ -129,11 +133,10 @@ input {
 input:focus {
   outline-width: 0;
 }
-
 /******************************SETUP STYLES******************************/
 
 /*CONTENT BOX STYLES*/
-#add-school-button {
+#add-school {
   margin-left: 1em;
 }
 /******************************TABS STYLES******************************/
@@ -142,7 +145,7 @@ input:focus {
   display: flex;
   flex-direction: column;
   margin: 0 1em;
-}
+}foote
 .tabs-rows {
   flex-direction: row;
   display: flex;
@@ -331,11 +334,19 @@ margin-top: 0.5em;
 .school-wins li{
 margin-bottom:1em;
 }
-
 .noDisplay {
   display: none;
 }
 
 .display {
   display: flex;
+}
+.school-button
+{
+  margin: 0 0.5em .25em 0;
+  max-width: 20.5%;
+   overflow-wrap: break-word;
+  border-top-left-radius: 50%;
+  border-top-right-radius:50%;
+  padding:0.8em 0.5em 0.5em 0.5em;
 }
