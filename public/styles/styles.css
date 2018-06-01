@@ -73,6 +73,11 @@ header h1 {
 h1 a {
   color: #fff;
 }
+h4 {
+  margin: 0;
+  text-decoration: underline;
+  font-weight: 900;
+}
 
 /*CONTENT BOX STYLES*/
 
@@ -166,6 +171,14 @@ input:focus {
 .lists {
   width: 35%;
 }
+.school-tab {
+  margin: 0 0.5em .25em 0;
+  width: 20%;
+   overflow-wrap: break-word;
+  border-top-left-radius: 50%;
+  border-top-right-radius:50%;
+  padding:0.8em 0.5em 0.5em 0.5em;
+}
 /******************************PAIRINGS STYLES******************************/
 
 /*CONTENT BOX STYLES*/
@@ -177,28 +190,36 @@ input:focus {
   flex-direction: row;
   width: 80%;
   margin: 0 auto;
-  height:75%;
+  height:65%;
+  padding:0.5em;
 }
 .opponents {
   flex-direction: column;
+  /*justify-content: space-between;*/
 }
 .prop-col {
-  width: 45%;
-}
-.vs-col {
-  font-weight: 900;
-  width: 10%;
+  width: 50%;
 }
 .opp-col {
-  width: 45%;
+  width: 50%;
 }
-.opponents ul li {
-  padding-bottom: 0.5%;
+
+ul li{
+  line-height: 1.618em;
 }
+.noDisplay {
+  display: none;
+}
+.display {
+  display: flex;
+}
+
+
+
 /******************************RESULTS STYLES******************************/
 
 /*CONTENT BOX STYLES*/
-.col-container {
+/*.col-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -265,17 +286,13 @@ input:focus {
 .winner button {
   margin-top: 0.5em;
 }
-h4 {
-  margin: 0;
-  text-decoration: underline;
-  font-weight: 900;
-}
+
 #add-res-button{
   width:65%;
   margin-left: auto;
-}
-
-/******************************AWARDS STYLES******************************/
+}*/
+/*
+*****************************AWARDS STYLES*****************************
 .award-box{
   display: flex;
   flex-direction: row;
@@ -327,22 +344,8 @@ h4 {
 .school-wins li {
 margin-bottom:1em;
 }
-.noDisplay {
-  display: none;
-}
-.display {
-  display: flex;
-}
 
-.school-tab {
-  margin: 0 0.5em .25em 0;
-  max-width: 20.5%;
-   overflow-wrap: break-word;
-  border-top-left-radius: 50%;
-  border-top-right-radius:50%;
-  padding:0.8em 0.5em 0.5em 0.5em;
-}
-
+*/
 /******************************MEDIA QUERIES ******************************/
 
 /*Width media queries*/
@@ -350,54 +353,60 @@ margin-bottom:1em;
 @media (max-width: 830px) {
   .wrapper{
   width:60%;
-}
+  }
 }
 @media (max-width: 700px) {
   .wrapper{
   width:70%;
-}
+  }
 }
 @media (max-width: 570px) {
   .wrapper{
   width:80%;
-}
+  }
 }
 @media (max-width: 510px) {
   ::-webkit-input-placeholder {
   font-size: .8em;
-}
+  }
 }
 @media (max-width: 465px) {
   .wrapper{
   width:88%;
-}
+  }
 }
 @media (max-width: 380px) {
   ::-webkit-input-placeholder {
   font-size: .7em;
-}
+  }
 h2{
   font-size: 1.3em;
-}
+  }
 }
 
-/*height*/
-
-@media (max-height: 500px) {
-  .wrapper{
-  width:95%;
-}
-.main-box h2 {
-  margin: 1em 0 1em 0;
-}
+/*height media queries**/
 
 @media (max-height: 600px) {
 .main-box{
   height: 55vh;
+  }
 }
-}
+
 @media (max-height: 550px) {
 .main-box{
   height: 60vh;
+  }
 }
+
+@media (max-height: 500px) {
+  .wrapper{
+  width:95%;
+  }
+.main-box h2 {
+  margin: 1em 0 1em 0;
+  }
 }
+
+
+
+
