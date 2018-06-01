@@ -50,18 +50,6 @@ let entryPage = `<div class="tabs-wrapper" id="entry-page">
                     </div>
                   </div>`
 
-let pairingsPage = `<h2>Pairings</h2>
-                    <div class="pairings boxes">
-                      <div>
-                        <ul id="proposition">
-                        </ul>
-                      </div>
-                      <div>
-                        <ul id="opposition">
-                        </ul>
-                      </div>
-                    </div>`
-
 let setupPageNav = `<button class="back-button" id="to-landing">Back</button>
                     <button class="continue-button" id="to-pairings">Pair Teams</button>`
 
@@ -70,8 +58,8 @@ let landingPageNav = `<button class="invisible-button" class="back-button">Back<
 
 let entryPageNav = `<button class="back-button" id="back-to-setup">Back to Setup</button>`
 
-let pairingsPageNav = `<button class ="back-button" id="back-to-setup">Back</button>
-                   <button class ="continue-button">Enter Results</button>`
+let pairingsPageNav = `<button class ="back-button" id="back-to-setup">Back</button>`
+
 
 /////////////////////////////////////////////////////////
                                 /*other variables*/
@@ -324,12 +312,12 @@ $('#dynamic-box').on('click', '#saveJudge', (e) => {
             $('.main-box').html(
               `<h2>Pairings</h2>
               <div class="pairings boxes">
-                <div>
+                <div class="prop-col">
                   <ul id="proposition">
                   ${addPropTeams(response)}
                   </ul>
                 </div>
-                <div>
+                <div class="opp-col">
                   <ul id="opposition">
                   ${addOppTeams(response)}
                   </ul>
